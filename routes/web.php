@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KesiswaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        $role = auth()->user()->role;
+
+        if ($role == 'kesiswaan') {
+            return redirect('kesiswaan');
+        } elseif ($role == 'siswa') {
+            return redirect('siswa');
+        } elseif ($role == 'wali') {
+            return redirect('wali');
+        } elseif ($role == 'operator') {
+            return redirect('operator');       
+        } 
+        else {
+            return redirect('/home');
+        }
+    }
+    return view('login-page-user');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::middleware(['auth', 'Kesiswaan:kesiswaan'])->group(function() {
+    Route::resource('kesiswaan', App\Http\Controllers\KesiswaanController::class);
+});
+Route::middleware(['auth', 'Operator:operator'])->group(function() {
+    Route::resource('operator', App\Http\Controllers\OperatorController::class);
+});
+

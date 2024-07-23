@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class, 'id_user');
+    }
+
+    public function guru()
+    {
+        return $this->hasOne(Wali_Kelas::class, 'id_user');
+    }
 }
