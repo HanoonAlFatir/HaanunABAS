@@ -21,7 +21,7 @@
 
     3. Global/Base
         _color
-        _custom-grid
+        _-grid
         _fonts
         _helper
         _reset
@@ -8034,7 +8034,6 @@ a {
     transform: scale(1); } }
 
 .footer {
-  padding-left: 17.1875rem;
   background-color: rgba(88, 115, 254, 0.04); }
   .footer .copyright {
     padding: 0.9375rem; }
@@ -15180,8 +15179,8 @@ button {
   padding: .7rem 1.4rem; }
 
 .btn-circle {
-  height: 5rem;
-  width: 5rem;
+  height: 30px;
+  width: 30px;
   border-radius: 50% !important; }
   .btn-circle-sm {
     width: 4.5rem;

@@ -17,6 +17,7 @@ class WaliKelasSeeder extends Seeder
             'nuptk' => '1234567890123456',
             'id_user' => 5,
             'nama' => 'Engkus Kusnadi',
+            'jenis_kelamin' => 'laki laki',
             'nip' => '198005052022011001',
             'nik' => '3210123456789012',
         ]);
@@ -25,14 +26,16 @@ class WaliKelasSeeder extends Seeder
             'nuptk' => '2345678901234567',
             'id_user' => 6,
             'nama' => 'Himatul Munawaroh',
+            'jenis_kelamin' => 'perempuan',
             'nip' => '198107062022021002',
             'nik' => '3210987654321098',
         ]);
 
         Wali_Kelas::create([
             'nuptk' => '3456789012345678',
-            'id_user' => 6,
+            'id_user' => 7,
             'nama' => 'Ani Nuraeni',
+            'jenis_kelamin' => 'perempuan',
             'nip' => '198209072022031003',
             'nik' => '3210876543210987',
         ]);

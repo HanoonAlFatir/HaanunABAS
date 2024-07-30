@@ -14,9 +14,10 @@ class Kelas extends Model
 
     protected $fillable = [
         'id_jurusan',
-        'NUPTK',
+        'nuptk',
         'nomor_kelas',
         'tingkat',
+        'jumlah_siswa',
     ];
 
     public function jurusan()
@@ -26,7 +27,7 @@ class Kelas extends Model
 
     public function walikelas()
     {
-        return $this->belongsTo(Wali_Kelas::class, 'nuptk');
+        return $this->belongsTo(Wali_Kelas::class, 'nuptk', 'nuptk');
     }
 
     public function siswa()

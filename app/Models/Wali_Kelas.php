@@ -25,13 +25,15 @@ class Wali_Kelas extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function kelas()
     {
         return $this->belongsTo(kelas::class, 'id_kelas');
     }
+
+
 
     public $timestamps = false;
 }

@@ -16,7 +16,7 @@ class Jurusan extends Model
 
     public function kelas()
     {
-        return $this->hasMany(Kelas::class ,'id_jurusan');
+        return $this->hasMany(Kelas::class ,'id_jurusan', 'id_jurusan');
     }
 
     public $timestamps = false;
