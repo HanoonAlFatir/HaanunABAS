@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JurusanController extends Controller
 {
@@ -30,7 +31,7 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_jurusan' => 'required|unique:jurusan,id_jurusan',
+            'id_jurusan' => 'required|unique:jurusans,id_jurusan',
             'nama_jurusan' => 'required',
         ]);
 
@@ -63,7 +64,11 @@ class JurusanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table('jurusans')->where('id_jurusan', $request->id_jurusan)->update([
+            'nama_jurusan' => $request->nama_jurusan
+        ]);
+
+        return redirect()->route('jurusan')->with('success', 'Jurusan berhasil diupdate');
     }
 
     /**
@@ -71,6 +76,15 @@ class JurusanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $jurusan = Jurusan::find($id);
+
+        if (!$jurusan) {
+            return redirect()->route('jurusan')->with('error', 'Jurusan tidak ditemukan');
+        }
+
+        // Hapus jurusan
+        $jurusan->delete();
+
+        return redirect()->route('jurusan')->with('success', 'Jurusan berhasil dihapus');
     }
 }

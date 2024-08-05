@@ -8,11 +8,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Dashboard Operator</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/kesiswaan/images/favicon.png') }}">
     <link href="{{ asset('assets/kesiswaan/vendor/pg-calendar/css/pignose.calendar.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/vendor/datatables/css/jquery.dataTables.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/vendor/chartist/css/chartist.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/css/style.css') }} " rel="stylesheet">
+
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
 
 </head>
@@ -202,7 +203,7 @@
 
     <script src="{{  asset('assets/kesiswaan/vendor/moment/moment.min.js')  }}"></script>
     <script src="{{  asset('assets/kesiswaan/vendor/pg-calendar/js/pignose.calendar.min.js')  }}"></script>
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="{{  asset('assets/kesiswaan/js/dashboard/dashboard-2.js')  }}"></script>
     <!-- Circle progress -->

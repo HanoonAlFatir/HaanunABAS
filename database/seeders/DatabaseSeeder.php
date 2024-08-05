@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             WaliKelasSeeder::class,
             KelasSeeder::class,
             SiswaSeeder::class,
+            KoordinatSeeder::class,
+            WaktuSeeder::class,
         ]);
     }
 }

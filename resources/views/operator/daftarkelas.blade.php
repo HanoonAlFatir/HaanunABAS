@@ -39,17 +39,17 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 275.184px;">ID Kelas</th>
+                                                style="width: 75.184px;">ID Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: 100.55px;">ID Jurusan</th>
+                                                style="width: 80.55px;">ID Jurusan</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
                                                 aria-label="Name: activate to sort column descending"
                                                 style="width: 178.8px;">nuptk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: 180.092px;">Nomor Kelas</th>
+                                                style="width: 100.092px;">Nomor Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: 118.068px;">Tingkat</th>
@@ -71,22 +71,82 @@
                                                 <td>{{ $k->nomor_kelas }}</td>
                                                 <td>{{ $k->tingkat }}</td>
                                                 <td>{{ $k->jumlah_siswa }}</td>
-                                                <td class="row">
-                                                    <a href="{{ route('operator.edit', $k->id_kelas) }}"
-                                                        class="btn btn-success mr-2">
+                                                <td class="row d-flex align-items-center">
+                                                    <button class="btn btn-success mr-2 edit-kelas" data-toggle="modal" data-target="#editKelasModal{{ $k->id_kelas }}">
                                                         <i class="ti-pencil"></i>
-                                                    </a>
-                                                    <form action="{{ route('operator.destroy', $k->id_kelas) }}"
-                                                        method="POST" style="display:inline;">
+                                                    </button>
+                                                    <form action="{{ route('hapuskelas', $k->id_kelas) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"
-                                                            onclick="return confirm('Apakah Anda yakin?')">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin?')">
                                                             <i class="ti-trash"></i>
                                                         </button>
                                                     </form>
+                                                    <a href="{{ route('daftarsiswa', ['id_kelas' => $k->id_kelas]) }}" class="btn btn-info ml-2">
+                                                        <i class="ti-eye"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
+                                            <div class="modal fade" id="editKelasModal{{ $k->id_kelas }}" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editKelasModalLabel">Edit Kelas</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{ route('editkelas', ['id_kelas' => $k->id_kelas]) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="modal-body">
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label for="edit_id_jurusan" style="color: black">ID Jurusan</label>
+                                                                        <select id="edit_id_jurusan" name="id_jurusan" class="form-control" required>
+                                                                            <option value="" disabled selected>Pilih Jurusan</option>
+                                                                            @foreach($jurusan as $j)
+                                                                                <option value="{{ $j->id_jurusan }}">{{ $j->nama_jurusan }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="edit_nuptk" style="color: black">NUPTK</label>
+                                                                        <select id="edit_nuptk" name="nuptk" class="form-control" required>
+                                                                            <option value="" disabled selected>Pilih NUPTK</option>
+                                                                            @foreach($walikelas as $w)
+                                                                                <option value="{{ $w->nuptk }}">{{ $w->nuptk }} - {{ $w->nama }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_nomor_kelas" style="color: black">Nomor Kelas</label>
+                                                                    <input type="text" id="edit_nomor_kelas" name="nomor_kelas" class="form-control"
+                                                                    value="{{ $k->nomor_kelas }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_tingkat" style="color: black">Tingkat</label>
+                                                                    <select id="edit_tingkat" name="tingkat" class="form-control" required>
+                                                                        <option value="" disabled selected>Pilih Tingkat</option>
+                                                                        <option value="10">Kelas 10</option>
+                                                                        <option value="11">Kelas 11</option>
+                                                                        <option value="12">Kelas 12</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_jumlah_siswa" style="color: black">Jumlah Siswa</label>
+                                                                    <input type="text" id="edit_jumlah_siswa" name="jumlah_siswa" class="form-control"
+                                                                    value="{{ $k->jumlah_siswa }}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -95,6 +155,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Modal Tambah Kelas --}}
             <div class="modal fade" id="addKelasModal" tabindex="-1" role="dialog"
                 aria-labelledby="addKelasModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -105,11 +166,11 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="" method="POST">
+                        <form action="{{ route('tambahkelas') }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="id_jurusan">ID Jurusan</label>
+                                    <label for="id_jurusan" style="color: black">ID Jurusan</label>
                                     <select name="id_jurusan" class="form-control" required>
                                         @foreach ($jurusan as $j)
                                             <option value="{{ $j->id_jurusan }}">{{ $j->nama_jurusan }}</option>
@@ -117,7 +178,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nuptk">NUPTK</label>
+                                    <label for="nuptk" style="color: black">NUPTK</label>
                                     <select name="nuptk" class="form-control" required>
                                         @foreach ($walikelas as $w)
                                             <option value="{{ $w->nuptk }}">{{ $w->nama }}</option>
@@ -125,25 +186,27 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nomor_kelas">Nomor Kelas</label>
+                                    <label for="nomor_kelas" style="color: black">Nomor Kelas</label>
                                     <input type="text" name="nomor_kelas" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tingkat">Tingkat</label>
+                                    <label for="tingkat" style="color: black">Tingkat</label>
                                     <input type="text" name="tingkat" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="jumlah_siswa">Jumlah Siswa</label>
+                                    <label for="jumlah_siswa" style="color: black">Jumlah Siswa</label>
                                     <input type="number" name="jumlah_siswa" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
+

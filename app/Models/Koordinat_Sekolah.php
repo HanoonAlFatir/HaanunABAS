@@ -9,6 +9,7 @@ class Koordinat_Sekolah extends Model
 {
     use HasFactory;
 
+    protected $table = 'koordinat_sekolahs';
     protected $fillable = [
         'titik_koordinat',
         'jarak',
@@ -18,4 +19,6 @@ class Koordinat_Sekolah extends Model
     {
         return $this->hasMany(Absensi::class, 'id_koordinat_sekolah');
     }
+
+    public $timestamps = false;
 }

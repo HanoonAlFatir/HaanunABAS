@@ -83,12 +83,13 @@
                                                 <td>{{ $w->nip }}</td>
                                                 <td>{{ $w->nik }}</td>
                                                 <td class="row">
-                                                    <a href="{{ route('operator.edit', $w->nuptk) }}"
-                                                        class="btn btn-success mr-2">
+                                                    <button type="button" class="btn btn-success mr-2 edit-wali-kelas"
+                                                        data-toggle="modal"
+                                                        data-target="#editWaliKelasModal{{ $w->id_user }}">
                                                         <i class="ti-pencil"></i>
-                                                    </a>
-                                                    <form action="{{ route('operator.destroy', $w->nuptk) }}" method="POST"
-                                                        style="display:inline;">
+                                                    </button>
+                                                    <form action="{{ route('operator.destroy', $w->nuptk) }}"
+                                                        method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"
@@ -98,6 +99,77 @@
                                                     </form>
                                                 </td>
                                             </tr>
+                                            <div class="modal fade" id="editWaliKelasModal{{ $w->id_user }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="editWaliKelasModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editWaliKelasModalLabel">Edit Data
+                                                                Wali Kelas</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form method="POST"
+                                                            action="{{ route('walikelas.update', ['id' => $w->id_user]) }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="edit_nuptk"
+                                                                        style="color: black">NUPTK</label>
+                                                                    <input type="text" name="nuptk" id="edit_nuptk"
+                                                                        class="form-control" value="{{ $w->nuptk }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_id_user" style="color: black">ID
+                                                                        User</label>
+                                                                    <input type="text" name="id_user"
+                                                                        id="edit_id_user" value="{{ $w->id_user }}" class="form-control" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_nama"
+                                                                        style="color: black">Nama</label>
+                                                                    <input type="text" name="nama" id="edit_nama"
+                                                                        class="form-control" value="{{ $w->nama }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_jenis_kelamin"
+                                                                        style="color: black">Jenis Kelamin</label>
+                                                                    <select name="jenis_kelamin" id="edit_jenis_kelamin"
+                                                                        class="form-control" required>
+                                                                        <option value="laki laki">Laki-laki</option>
+                                                                        <option value="perempuan">Perempuan</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_nip" style="color: black">NIP</label>
+                                                                    <input type="text" name="nip" id="edit_nip"
+                                                                        class="form-control" value="{{ $w->nip }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_nik" style="color: black">NIK</label>
+                                                                    <input type="text" name="nik" id="edit_nik"
+                                                                        class="form-control" value="{{ $w->nik }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit_email" style="color: black">Email</label>
+                                                                    <input type="email" name="email" id="edit_email" class="form-control"
+                                                                    value="{{ $w->user->email }}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Tutup</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -106,8 +178,9 @@
                     </div>
                 </div>
 
-                {{-- MODAL --}}
-                <div class="modal fade" id="addWaliKelasModal" tabindex="-1" role="dialog" aria-labelledby="addWaliKelasModalLabel" aria-hidden="true">
+                {{-- Modal Tambah Wali Kelas --}}
+                <div class="modal fade" id="addWaliKelasModal" tabindex="-1" role="dialog"
+                    aria-labelledby="addWaliKelasModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -116,7 +189,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{{ route('walikelas.store') }}" method="POST">
+                            <form action="{{ route('tambahwalikelas') }}" method="POST">
                                 @csrf
                                 <div class="modal-body">
                                     <div class="form-group">

@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\Jurusan;
 use App\Models\Wali_Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
 {
@@ -34,7 +35,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_jurusan' => 'required|exists:jurusan,id_jurusan',
+            'id_jurusan' => 'required|exists:jurusans,id_jurusan',
             'nuptk' => 'required|exists:wali__kelas,nuptk',
             'nomor_kelas' => 'required',
             'tingkat' => 'required',
@@ -73,7 +74,15 @@ class KelasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table('kelas')->where('id_kelas', $request->id_kelas)->update([
+            'id_jurusan' => $request->id_jurusan,
+            'nuptk' => $request->nuptk,
+            'nomor_kelas' => $request->nomor_kelas,
+            'tingkat' => $request->tingkat,
+            'jumlah_siswa' => $request->jumlah_siswa,
+        ]);
+
+        return redirect()->route('kelas')->with('success', 'Kelas berhasil diupdate');
     }
 
     /**
@@ -81,6 +90,7 @@ class KelasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Kelas::destroy($id);
+        return redirect()->route('kelas')->with('success', 'Kelas berhasil dihapus');
     }
 }

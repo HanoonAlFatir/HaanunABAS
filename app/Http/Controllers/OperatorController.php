@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wali_Kelas;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class OperatorController extends Controller
 {
@@ -19,10 +21,6 @@ class OperatorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function lokasi()
-    {
-        return view('operator.lokasi');
-    }
     public function create()
     {
         //
@@ -49,37 +47,33 @@ class OperatorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function edit(string $id)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($nuptk)
-    {
-        $wali = Wali_Kelas::where('nuptk', $nuptk)->first();
-        if (!$wali) {
-            return redirect()->route('operator.index')->with('error', 'Data not found');
-        }
-        return view('operator.editwalikelas', compact('wali'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $nuptk)
+    public function update(Request $request)
     {
-        $wali = Wali_Kelas::where('nuptk', $nuptk)->first();
-        $wali->nama = $request->input('nama');
-        $wali->jenis_kelamin = $request->input('jenis_kelamin'); // Update for gender enum
-        $wali->nip = $request->input('nip');
-        $wali->nik = $request->input('nik');
-        $wali->save();
+        DB::table('wali__kelas')->where('id_user', $request->id)->update([
+            'nuptk' => $request->nuptk,
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'nip' => $request->nip,
+            'nik' => $request->nik,
+        ]);
 
-        return redirect()->route('walikelas')->with('success', 'Data updated successfully');
+        DB::table('users')->where('id', $request->id)->update([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password) ,
+        ]);
+
+        return redirect()->route('walikelas')->with('success', 'Data wali kelas berhasil diperbarui.');
     }
+
 
 
 
