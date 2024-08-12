@@ -13,6 +13,7 @@
     <link href="{{ asset('assets/kesiswaan/vendor/datatables/css/jquery.dataTables.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/vendor/chartist/css/chartist.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/css/style.css') }} " rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
 
@@ -117,25 +118,25 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
 
-                    <li class="nav-label first">Presensi</li>
-                    <li><a class="has-" href="{{ route('lokasi') }}" aria-expanded="false"><i
-                        class="ti-location-pin"></i><span class="nav-text">Lokasi</span></a>
-                        <!-- <ul aria-expanded="false">
-                            <li><a href="./index.html">Dashboard 1</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a class="has-" href="dashboard-kesiswaan.html" aria-expanded="false"><i
-                        class="ti-calendar"></i><span class="nav-text">Jadwal Libur</span></a>
-                    </li>
                     <li class="nav-label first">Data Kelas</li>
                     <li><a class="has-" href="{{ route('operator.index') }}" aria-expanded="false"><i
                         class="ti-id-badge"></i><span class="nav-text">Wali Kelas</span></a>
+                    </li>
+                    <li><a class="has-" href="{{ route('daftarkesiswaan') }}" aria-expanded="false"><i
+                        class="ti-user"></i><span class="nav-text">Kesiswaan</span></a>
                     </li>
                     <li><a class="has-" href="{{ route('jurusan') }}" aria-expanded="false"><i
                         class="ti-files"></i><span class="nav-text">Jurusan</span></a>
                     </li>
                     <li><a class="has-" href="{{ route('kelas') }}" aria-expanded="false"><i
                         class="ti-home"></i><span class="nav-text">Kelas</span></a>
+                    </li>
+                    <li class="nav-label first">Presensi</li>
+                    <li><a class="has-" href="{{ route('lokasi') }}" aria-expanded="false"><i
+                        class="ti-location-pin"></i><span class="nav-text">Lokasi</span></a>
+                        <!-- <ul aria-expanded="false">
+                            <li><a href="./index.html">Dashboard 1</a></li>
+                        </ul> -->
                     </li>
 
                     {{-- <li class="nav-label">Rekap</li>
@@ -210,6 +211,7 @@
 
     <script src="{{  asset('assets/kesiswaan/vendor/datatables/js/jquery.dataTables.min.js')  }}"></script>
     <script src="{{  asset('assets/kesiswaan/js/plugins-init/datatables.init.js')  }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <!-- Tambahkan di bagian bawah <body> -->
 </body>

@@ -12,4 +12,16 @@ class KesiswaanController extends Controller
             "title" => "Dashboard",
         ]);
     }
+
+    public function update(Request $request, string $id)
+    {
+
+    }
+
+    public function destroy($nuptk)
+    {
+
+    }
+
+
 }

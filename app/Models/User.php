@@ -48,8 +48,13 @@ class User extends Authenticatable
         return $this->hasOne(Siswa::class, 'id_user', 'id');
     }
 
-    public function guru()
+    public function wali()
     {
         return $this->hasOne(Wali_Kelas::class, 'id_user');
+    }
+
+    public function ortu()
+    {
+        return $this->hasOne(Wali_Siswa::class, 'id_user', 'id_user');
     }
 }

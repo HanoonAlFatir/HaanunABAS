@@ -52,6 +52,7 @@
                                             name="batas_jam_pulang" value="{{ $waktu->batas_jam_pulang }}">
                                     </div>
                                 </div>
+                                
                                 <button type="submit" class="btn btn-primary mr-2 ">Update</button>
                             </form>
                         </div>

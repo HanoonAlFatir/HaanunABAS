@@ -35,12 +35,6 @@
                                                 class="fa fa-download color-warning"></i></span>Import
                                     </button>
                                 </a>
-                                <a href="#">
-                                    <button type="button" class="btn btn-rounded btn-success">
-                                        <span class="btn-icon-left text-success"><i
-                                                class="fa fa-upload color-success"></i></span>Export
-                                    </button>
-                                </a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -66,9 +60,6 @@
                                                 style="width: 118.068px;">NIP</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Salary: activate to sort column ascending"
-                                                style="width: 109.68px;">NIK</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
-                                                colspan="1" aria-label="Salary: activate to sort column ascending"
                                                 style="width: 109.68px;">Action</th>
                                         </tr>
 
@@ -78,18 +69,17 @@
                                             <tr>
                                                 <td>{{ $w->nuptk }}</td>
                                                 <td>{{ $w->user->id }}</td>
-                                                <td>{{ $w->nama }}</td>
+                                                <td>{{ $w->user->name }}</td>
                                                 <td>{{ $w->jenis_kelamin }}</td>
                                                 <td>{{ $w->nip }}</td>
-                                                <td>{{ $w->nik }}</td>
                                                 <td class="row">
                                                     <button type="button" class="btn btn-success mr-2 edit-wali-kelas"
                                                         data-toggle="modal"
                                                         data-target="#editWaliKelasModal{{ $w->id_user }}">
                                                         <i class="ti-pencil"></i>
                                                     </button>
-                                                    <form action="{{ route('operator.destroy', $w->nuptk) }}"
-                                                        method="POST" style="display:inline;">
+                                                    <form action="{{ route('operator.destroy', $w->nuptk) }}" method="POST"
+                                                        style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"
@@ -99,8 +89,8 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="editWaliKelasModal{{ $w->id_user }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="editWaliKelasModalLabel"
+                                            <div class="modal fade" id="editWaliKelasModal{{ $w->id_user }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="editWaliKelasModalLabel"
                                                 aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -121,19 +111,22 @@
                                                                     <label for="edit_nuptk"
                                                                         style="color: black">NUPTK</label>
                                                                     <input type="text" name="nuptk" id="edit_nuptk"
-                                                                        class="form-control" value="{{ $w->nuptk }}" required>
+                                                                        class="form-control" value="{{ $w->nuptk }}"
+                                                                        required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="edit_id_user" style="color: black">ID
                                                                         User</label>
                                                                     <input type="text" name="id_user"
-                                                                        id="edit_id_user" value="{{ $w->id_user }}" class="form-control" required>
+                                                                        id="edit_id_user" value="{{ $w->id_user }}"
+                                                                        class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="edit_nama"
                                                                         style="color: black">Nama</label>
                                                                     <input type="text" name="nama" id="edit_nama"
-                                                                        class="form-control" value="{{ $w->nama }}" required>
+                                                                        class="form-control" value="{{ $w->name }}"
+                                                                        required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="edit_jenis_kelamin"
@@ -147,17 +140,15 @@
                                                                 <div class="form-group">
                                                                     <label for="edit_nip" style="color: black">NIP</label>
                                                                     <input type="text" name="nip" id="edit_nip"
-                                                                        class="form-control" value="{{ $w->nip }}" required>
+                                                                        class="form-control" value="{{ $w->nip }}"
+                                                                        required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="edit_nik" style="color: black">NIK</label>
-                                                                    <input type="text" name="nik" id="edit_nik"
-                                                                        class="form-control" value="{{ $w->nik }}" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="edit_email" style="color: black">Email</label>
-                                                                    <input type="email" name="email" id="edit_email" class="form-control"
-                                                                    value="{{ $w->user->email }}" required>
+                                                                    <label for="edit_email"
+                                                                        style="color: black">Email</label>
+                                                                    <input type="email" name="email" id="edit_email"
+                                                                        class="form-control"
+                                                                        value="{{ $w->user->email }}" required>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -205,6 +196,14 @@
                                         <input type="text" name="nama" class="form-control" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="email" style="color: black">Email</label>
+                                        <input type="email" name="email" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" style="color: black">Password</label>
+                                        <input type="password" name="password" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="jenis_kelamin" style="color: black">Jenis Kelamin</label>
                                         <select name="jenis_kelamin" class="form-control" required>
                                             <option value="laki Laki">Laki-Laki</option>
@@ -214,10 +213,6 @@
                                     <div class="form-group">
                                         <label for="nip" style="color: black">NIP</label>
                                         <input type="text" name="nip" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nik" style="color: black">NIK</label>
-                                        <input type="text" name="nik" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -229,4 +224,6 @@
                     </div>
                 </div>
             </div>
-        @endsection
+        </div>
+    </div>
+@endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Wali_Kelas;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,8 @@ class OperatorController extends Controller
     public function index()
     {
         $wali = Wali_Kelas::with('user')->get();
-        return view('operator.daftarwalikelas', compact('wali'));
+        $user = User::all();
+        return view('operator.daftarwalikelas', compact('wali', 'user'));
     }
 
     /**
@@ -31,16 +33,29 @@ class OperatorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nuptk' => 'required|unique:wali__kelas',
-            'id_user' => 'required',
-            'nama' => 'required',
-            'jenis_kelamin' => 'required',
-            'nip' => 'required',
-            'nik' => 'required',
+        // $request->validate([
+        //     'nuptk' => 'required|unique:wali__kelas',
+        //     'id_user' => 'required',
+        //     'nama' => 'required',
+        //     'jenis_kelamin' => 'required',
+        //     'nip' => 'required',
+        // ]);
+
+        $user = User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'wali_kelas',
         ]);
 
-        Wali_Kelas::create($request->all());
+        Wali_Kelas::create([
+            'nuptk' => $request->nuptk,
+            'id_user' => $user->id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'nip' => $request->nip,
+        ]);
+
+        // Wali_Kelas::create($request->all());
         return redirect()->route('walikelas')->with('success', 'Wali Kelas berhasil ditambahkan.');
     }
 
@@ -62,7 +77,6 @@ class OperatorController extends Controller
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
             'nip' => $request->nip,
-            'nik' => $request->nik,
         ]);
 
         DB::table('users')->where('id', $request->id)->update([
@@ -71,7 +85,7 @@ class OperatorController extends Controller
             'password' => Hash::make($request->password) ,
         ]);
 
-        return redirect()->route('walikelas')->with('success', 'Data wali kelas berhasil diperbarui.');
+        return redirect()->route('walikelas')->with('success', 'Data wali kelas berhasil diupdate.');
     }
 
 
@@ -88,8 +102,13 @@ class OperatorController extends Controller
             return redirect()->route('walikelas')->with('error', 'Data not found');
         }
 
+        $user = User::find($wali->id_user);
         $wali->delete();
 
-        return redirect()->route('walikelas')->with('success', 'Data deleted successfully');
+        if ($user) {
+            $user->delete();
+        }
+
+        return redirect()->route('walikelas')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -16,9 +16,9 @@ return new class extends Migration
 
             $table->string('nis');
             $table->foreign('nis')->references('nis')->on('siswas');
-
-            $table->enum('status', ['sakit', 'hadir', 'izin'])->default('hadir');
-            $table->string('bukti');
+            $table->enum('status', ['Sakit', 'Hadir', 'Izin','Alfa', 'Terlambat', 'TAP'])->default('Alfa');
+            $table->string('photo_in');
+            $table->string('photo_out')->nullable();
             $table->string('keterangan')->nullable();
             $table->date('date');
             $table->time('jam_masuk')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensi');
+        Schema::dropIfExists('absensis');
     }
 };

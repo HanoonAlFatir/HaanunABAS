@@ -18,8 +18,9 @@ class WaktuSeeder extends Seeder
             'batas_jam_masuk' => '07:30:00',
             'jam_pulang' => '15:00:00',
             'batas_jam_pulang' => '15:30:00',
+            'toleransi_waktu' => '600'
         ]);
     }
 
-    
+
 }

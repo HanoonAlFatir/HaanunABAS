@@ -20,7 +20,6 @@ class Wali_Kelas extends Model
         'nama',
         'jenis_kelamin',
         'nip',
-        'nik',
     ];
 
     public function user()
@@ -30,7 +29,12 @@ class Wali_Kelas extends Model
 
     public function kelas()
     {
-        return $this->belongsTo(kelas::class, 'id_kelas');
+        return $this->hasOne(Kelas::class, 'nuptk', 'nuptk');
+    }
+
+    public function jurusan()
+    {
+        return $this->hasOneThrough(Jurusan::class, Kelas::class, 'nuptk', 'id_jurusan', 'nuptk', 'id_jurusan');
     }
 
 

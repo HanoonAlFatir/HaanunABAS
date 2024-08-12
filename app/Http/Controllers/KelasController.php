@@ -7,6 +7,7 @@ use App\Models\Jurusan;
 use App\Models\Wali_Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KelasController extends Controller
 {
@@ -19,6 +20,20 @@ class KelasController extends Controller
         $jurusan = Jurusan::all();
         $walikelas = Wali_Kelas::all();
         return view('operator.daftarkelas', compact('kelas', 'walikelas', 'jurusan'));
+    }
+
+    public function importKelas(Request $request)
+    {
+        $request->validate([
+            'import_file' => [
+                'required',
+                'file'
+            ],
+        ]);
+
+        Excel::import(new KelasImport, $request->file('import_file'));
+
+        return redirect()->back()->with('success', 'Data Berhasil Diimport!');
     }
 
     /**

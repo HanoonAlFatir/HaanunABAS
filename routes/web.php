@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaftarKesiswaanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KesiswaanController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\AbsenSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,20 +35,16 @@ Route::get('/', function () {
         } elseif ($role == 'operator') {
             return redirect('operator');
         }
-        else {
-            return redirect('/');
-        }
     }
     return view('login-page-user');
 });
 
+
+
 Auth::routes();
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
-// KESISWAAN
-Route::middleware(['auth', 'Kesiswaan:kesiswaan'])->group(function() {
-    Route::resource('kesiswaan', App\Http\Controllers\KesiswaanController::class);
+Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
+    Route::get('/siswa', [AbsenSiswaController::class, 'index'])->name('siswa.dashboard');
 });
 
 // OPERATOR LOKASI
@@ -74,9 +72,24 @@ Route::middleware(['auth', 'Operator:operator'])->group(function() {
     Route::post('tambahkelas', [KelasController::class, 'store'])->name('tambahkelas');
     Route::put('/editkelas/{id_kelas}', [KelasController::class, 'update'])->name('editkelas');
     Route::delete('/hapuskelas/{id_kelas}', [KelasController::class, 'destroy'])->name('hapuskelas');
+    Route::post('/kelas/import', [KelasController::class, 'importKelas'])->name('import-kelas');
 
 // DAFTAR SISWA
     Route::get('/siswa/{id_kelas}', [SiswaController::class, 'index'])->name('daftarsiswa');
     Route::put('/editsiswa/{nis}', [SiswaController::class, 'update'])->name('editsiswa');
+    Route::post('/siswa/tambahsiswa', [SiswaController::class, 'store'])->name('tambahsiswa');
+    Route::delete('/siswa/{nis}', [SiswaController::class, 'destroy'])->name('hapusSiswa');
+
+// DAFTAR KESISWAAN
+    Route::get('/daftarkesiswaan', [DaftarKesiswaanController::class, 'index'])->name('daftarkesiswaan');
+    Route::post('/kesiswaan/store', [DaftarKesiswaanController::class, 'store'])->name('kesiswaan.store');
+    Route::put('/kesiswaan/{id}', [DaftarKesiswaanController::class, 'update'])->name('editkesiswaan');
+    Route::delete('/kesiswaan/{id}', [DaftarKesiswaanController::class, 'destroy'])->name('hapuskesiswaan');
+
 });
 
+// KESISWAAN
+Route::middleware(['auth', 'Kesiswaan:kesiswaan'])->group(function() {
+    Route::get('/kesiswaan', [App\Http\Controllers\KesiswaanController::class, 'index'])->name('kesiswaan');
+
+});

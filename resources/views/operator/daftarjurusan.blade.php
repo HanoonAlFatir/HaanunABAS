@@ -23,11 +23,13 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Daftar Jurusan</h4>
+                            <div class="text-right">
                             <button type="button" class="btn btn-rounded btn-primary" data-toggle="modal"
                                 data-target="#addJurusanModal">
                                 <span class="btn-icon-left text-primary"><i
                                         class="fa fa-plus color-primary"></i></span>Tambah Jurusan
                             </button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive data-text">
@@ -36,13 +38,13 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 275.184px;">ID Jurusan</th>
+                                                style="width: 80.184px;">ID Jurusan</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: 100.55px;">Nama Jurusan</th>
+                                                style="width: 275.55px;">Nama Jurusan</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Salary: activate to sort column ascending"
-                                                style="width: 109.68px;">Action</th>
+                                                style="width: 50.68px;">Action</th>
                                         </tr>
 
                                     </thead>

@@ -19,12 +19,13 @@ return new class extends Migration
             $table->foreign('id_user')->references('id')->on('users');
 
             $table->unsignedInteger('id_kelas');
-            $table->foreign('id_kelas')->references('id_kelas')->on('kelas');
+            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('cascade');
 
-            $table->string('nama');
             $table->enum('jenis_kelamin', ['laki laki', 'perempuan']);
-            $table->string('nik')->unique();
+            $table->string('nik')->nullable();
+            $table->foreign('nik')->references('nik')->on('wali__siswas');
             $table->string('nisn')->unique();
+            
         });
     }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->time('batas_jam_masuk');
             $table->time('jam_pulang');
             $table->time('batas_jam_pulang');
+            $table->integer('toleransi_waktu');
         });
     }
 

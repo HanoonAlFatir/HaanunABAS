@@ -8064,12 +8064,48 @@ body.dark-mode-active .cart-item .cart-item-footer {
   );
 }
 
+.gradasigray {
+    color: white;
+    background-image: linear-gradient(
+        to bottom right,
+        #B4B4B8,
+        #B4B4B8
+    );
+}
+
+.gradasiyellow {
+  color: white;
+  background-image: linear-gradient(
+    to bottom right,
+    #FFC107,
+    #FFC107
+  );
+}
+
+.gradasiblue {
+    color: white;
+    background-image: linear-gradient(
+        to bottom right,
+        #593BDB,
+        #593BDB
+    );
+}
+
+.gradasilightblue {
+    color: white;
+    background-image: linear-gradient(
+        to bottom right,
+        #5FBAF9,
+        #5FBAF9
+    );
+}
+
 .iconpresence {
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .presencedetail {
-  line-height: 2px;
+  line-height: 7px;
 }
 
 .presencetitle {
@@ -8083,4 +8119,36 @@ body.dark-mode-active .cart-item .cart-item-footer {
 #chartdiv {
   width: 100%;
   height: 500px;
+}
+
+
+.absencontent {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.iconabsen {
+    font-size: 50px;
+}
+
+.absendetail {
+    line-height: 7px;
+}
+
+.tombolabsencontent {
+    display: flex;
+    justify-content: center;
+}
+
+.iconbuttonabsen {
+    font-size: 35px;
+}
+
+.absentitle {
+    color: white;
+    font-weight: 600;
+  }
+
+.absenbuttondetail {
+    line-height: 7px;
 }

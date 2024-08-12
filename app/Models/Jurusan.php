@@ -12,6 +12,8 @@ class Jurusan extends Model
     protected $table = 'jurusans';
     protected $primaryKey = 'id_jurusan';
 
+    protected $keyType = 'string';
+
     protected $fillable = ['nama_jurusan'];
 
     public function kelas()

@@ -18,7 +18,6 @@ class Siswa extends Model
         'nis',
         'id_user',
         'id_kelas',
-        'nama',
         'jenis_kelamin',
         'nik',
         'nisn',
@@ -37,6 +36,11 @@ class Siswa extends Model
     public function absensi()
     {
         return $this->hasMany(Absensi::class, 'NIS');
+    }
+
+    public function ortu()
+    {
+        return $this->hasOne(Wali_Siswa::class, 'nik', 'nik');
     }
 
     public $timestamps = false;
