@@ -45,6 +45,8 @@ Auth::routes();
 
 Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
     Route::get('/siswa', [AbsenSiswaController::class, 'index'])->name('siswa.dashboard');
+    Route::get('/siswa/absen', [AbsenSiswaController::class, 'absen'])->name('siswa.absen');
+    Route::post('/absen/store', [AbsenSiswaController::class, 'store']);
 });
 
 // OPERATOR LOKASI

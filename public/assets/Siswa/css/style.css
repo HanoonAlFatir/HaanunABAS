@@ -2020,8 +2020,11 @@ a.badge-dark {
 .card .card-header {
   background: transparent;
   color: #141515;
-  font-weight: 500;
-  padding: 12px 16px;
+  font-weight: 400;
+  font-size: 26px;
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #e1e1e1;
 }
 
@@ -8038,7 +8041,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
 
 .todaypresence {
   margin-top: 90px;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
 .presencecontent {
@@ -8142,6 +8145,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
 
 .iconbuttonabsen {
     font-size: 35px;
+    color: white;
 }
 
 .absentitle {
@@ -8152,3 +8156,91 @@ body.dark-mode-active .cart-item .cart-item-footer {
 .absenbuttondetail {
     line-height: 7px;
 }
+
+.buttonabsen {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 20px;
+}
+
+.cardcamera {
+    background: #ffffff;
+    border-radius: 6px;
+    border: 0;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.webcam-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+.webcam-capture,
+.webcam-capture video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    /* Radius border yang sama dengan wrapper */
+}
+
+.foto {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Memastikan gambar menutupi seluruh area */
+    border-radius: 10px;
+    /* Radius border yang sama dengan wrapper */
+    background-color: #e0e0e0;
+}
+
+.buttonform {
+    border: none;
+    background: transparent;
+    width: 100%;
+    color: white;
+}
+
+@media (max-width: 576px) {
+    .button-group button {
+        font-size: 0.8rem; /* Ukuran font yang lebih kecil di layar sangat kecil */
+    }
+
+    #user-detail {
+        margin-top: 20px;
+        display: flex;
+    }
+
+    #user-info {
+        margin-left: 30px !important;
+        /* margin-top: 1rem; */
+    }
+
+    .avatar img {
+        width: 100%; /* Ukuran avatar lebih kecil di layar sangat kecil */
+        height: 100%; /* Ukuran avatar lebih kecil di layar sangat kecil */
+    }
+
+    #user-name {
+        font-size: 1rem; /* Ukuran font nama lebih kecil di layar sangat kecil */
+    }
+
+    #user-role {
+        font-size: 0.8rem; /* Ukuran font peran lebih kecil di layar sangat kecil */
+    }
+
+    .btn.btn-link {
+        padding: 0.5rem; /* Padding lebih kecil di layar sangat kecil */
+        font-size: 0.8rem; /* Ukuran font tombol lebih kecil di layar sangat kecil */
+    }
+}
+
+

@@ -13,7 +13,7 @@ class Absensi extends Model
         'NIS',
         'status',
         'photo_in',
-        'photo_out,
+        'photo_out',
         'date',
         'jam_masuk',
         'jam_pulang',

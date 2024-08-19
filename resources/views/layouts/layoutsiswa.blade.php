@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -12,13 +13,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
     <title>ABAS</title>
-    <meta name="description" content="Mobilekit HTML Mobile UI Kit">
+    <meta name="description" content="Aplikasi Absensi">
     <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
     <link rel="icon" type="image/png" href="{{ asset('assets/siswa/img/favicon.png') }}" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/siswa/img/icon/192x192.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/siswa/css/style.css') }}">
     <link rel="manifest" href="__manifest.json">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    {{-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> --}}
 
 </head>
 
@@ -42,7 +44,7 @@
                             class="imaged w64 rounded">
                     </div>
                     <div id="user-info" class="ml-3">
-                        <h2 id="user-name">Haanun Syauqoni Al-Fatir</h2>
+                        <h2 id="user-name">{{ Auth::user()->name }}</h2>
                         <span id="user-role">XII RPL 1</span>
                     </div>
                 </div>
@@ -103,6 +105,253 @@
         </a>
     </div>
 
+    {{-- <div class="rekappresence mt-4">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="presencecontent">
+                            <div class="iconpresence primary">
+                                <ion-icon name="log-in"></ion-icon>
+                            </div>
+                            <div class="presencedetail">
+                                <h4 class="rekappresencetitle">Hadir</h4>
+                                <span class="rekappresencedetail">0 Hari</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="presencecontent">
+                            <div class="iconpresence green">
+                                <ion-icon name="document-text"></ion-icon>
+                            </div>
+                            <div class="presencedetail">
+                                <h4 class="rekappresencetitle">Izin</h4>
+                                <span class="rekappresencedetail">0 Hari</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="presencecontent">
+                            <div class="iconpresence warning">
+                                <ion-icon name="sad"></ion-icon>
+                            </div>
+                            <div class="presencedetail">
+                                <h4 class="rekappresencetitle">Sakit</h4>
+                                <span class="rekappresencedetail">0 Hari</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="presencecontent">
+                            <div class="iconpresence danger">
+                                <ion-icon name="alarm"></ion-icon>
+                            </div>
+                            <div class="presencedetail">
+                                <h4 class="rekappresencetitle">Terlambat</h4>
+                                <span class="rekappresencedetail">0 Hari</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    {{-- <div class="presencetab mt-2">
+        <div class="tab-pane fade show active" id="pilled" role="tabpanel">
+            <ul class="nav nav-tabs style1" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+                        Bulan Ini
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+                        Leaderboard
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content mt-2" style="margin-bottom:100px;">
+            <div class="tab-pane fade show active" id="home" role="tabpanel">
+                <ul class="listview image-listview">
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="image-outline" role="img" class="md hydrated"
+                                    aria-label="image outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Photos</div>
+                                <span class="badge badge-danger">10</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-secondary">
+                                <ion-icon name="videocam-outline" role="img" class="md hydrated"
+                                    aria-label="videocam outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Videos</div>
+                                <span class="text-muted">None</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <div class="icon-box bg-danger">
+                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
+                                    aria-label="musical notes outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                <div>Music</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel">
+                <ul class="listview image-listview">
+                    <li>
+                        <div class="item">
+                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                            <div class="in">
+                                <div>Edward Lindgren</div>
+                                <span class="text-muted">Designer</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                            <div class="in">
+                                <div>Emelda Scandroot</div>
+                                <span class="badge badge-primary">3</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                            <div class="in">
+                                <div>Henry Bove</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                            <div class="in">
+                                <div>Henry Bove</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                            <div class="in">
+                                <div>Henry Bove</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> --}}
+
     <!-- * App Bottom Menu -->
 
 
@@ -126,9 +375,14 @@
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
     <!-- Base Js File -->
     <script src="{{ asset('assets/siswa/js/base.js') }} "></script>
-    <script src="{{ asset('assets/siswa/js/timedate.js') }} "></script>
-    <script src="{{ asset('assets/siswa/js/jarak.js') }} "></script>
+
+    {{-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> --}}
+    <script src="{{ asset('assets/siswa/js/facedtc_and_coordinates.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script> --}}
+    <script src="{{ asset('assets/face-api.js-master/dist/face-api.min.js') }}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         var lokasiSekolah = @json($lok_sekolah->titik_koordinat);
