@@ -75,7 +75,8 @@
                                 </span>
                                 <div class="dropdown-menu p-0 m-0">
                                     <form>
-                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                        <input class="form-control" type="search" placeholder="Search"
+                                            aria-label="Search">
                                     </form>
                                 </div>
                             </div>
@@ -120,20 +121,20 @@
 
                     <li class="nav-label first">Data Kelas</li>
                     <li><a class="has-" href="{{ route('operator.index') }}" aria-expanded="false"><i
-                        class="ti-id-badge"></i><span class="nav-text">Wali Kelas</span></a>
+                                class="ti-id-badge"></i><span class="nav-text">Wali Kelas</span></a>
                     </li>
                     <li><a class="has-" href="{{ route('daftarkesiswaan') }}" aria-expanded="false"><i
-                        class="ti-user"></i><span class="nav-text">Kesiswaan</span></a>
+                                class="ti-user"></i><span class="nav-text">Kesiswaan</span></a>
                     </li>
                     <li><a class="has-" href="{{ route('jurusan') }}" aria-expanded="false"><i
-                        class="ti-files"></i><span class="nav-text">Jurusan</span></a>
+                                class="ti-files"></i><span class="nav-text">Jurusan</span></a>
                     </li>
                     <li><a class="has-" href="{{ route('kelas') }}" aria-expanded="false"><i
-                        class="ti-home"></i><span class="nav-text">Kelas</span></a>
+                                class="ti-home"></i><span class="nav-text">Kelas</span></a>
                     </li>
                     <li class="nav-label first">Presensi</li>
                     <li><a class="has-" href="{{ route('lokasi') }}" aria-expanded="false"><i
-                        class="ti-location-pin"></i><span class="nav-text">Lokasi</span></a>
+                                class="ti-location-pin"></i><span class="nav-text">Lokasi</span></a>
                         <!-- <ul aria-expanded="false">
                             <li><a href="./index.html">Dashboard 1</a></li>
                         </ul> -->
@@ -196,23 +197,25 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="{{  asset('assets/kesiswaan/vendor/global/global.min.js')  }} "></script>
-    <script src="{{  asset('assets/kesiswaan/js/quixnav-init.js')  }}"></script>
-    <script src="{{  asset('assets/kesiswaan/js/custom.min.js')  }}"></script>
+    <script src="{{ asset('assets/kesiswaan/vendor/global/global.min.js') }} "></script>
+    <script src="{{ asset('assets/kesiswaan/js/quixnav-init.js') }}"></script>
+    <script src="{{ asset('assets/kesiswaan/js/custom.min.js') }}"></script>
 
-    <script src="{{  asset('assets/kesiswaan/vendor/chartist/js/chartist.min.js')  }}"></script>
+    <script src="{{ asset('assets/kesiswaan/vendor/chartist/js/chartist.min.js') }}"></script>
 
-    <script src="{{  asset('assets/kesiswaan/vendor/moment/moment.min.js')  }}"></script>
-    <script src="{{  asset('assets/kesiswaan/vendor/pg-calendar/js/pignose.calendar.min.js')  }}"></script>
+    <script src="{{ asset('assets/kesiswaan/vendor/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/kesiswaan/vendor/pg-calendar/js/pignose.calendar.min.js') }}"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script src="{{  asset('assets/kesiswaan/js/dashboard/dashboard-2.js')  }}"></script>
+    <script src="{{ asset('assets/kesiswaan/js/dashboard/dashboard-2.js') }}"></script>
     <!-- Circle progress -->
 
-    <script src="{{  asset('assets/kesiswaan/vendor/datatables/js/jquery.dataTables.min.js')  }}"></script>
-    <script src="{{  asset('assets/kesiswaan/js/plugins-init/datatables.init.js')  }}"></script>
+    <script src="{{ asset('assets/kesiswaan/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/kesiswaan/js/plugins-init/datatables.init.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
     <!-- Tambahkan di bagian bawah <body> -->
 </body>
 

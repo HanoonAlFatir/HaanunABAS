@@ -44,9 +44,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
+    // ABSEN
     Route::get('/siswa', [AbsenSiswaController::class, 'index'])->name('siswa.dashboard');
     Route::get('/siswa/absen', [AbsenSiswaController::class, 'absen'])->name('siswa.absen');
     Route::post('/absen/store', [AbsenSiswaController::class, 'store']);
+
+    // FORM
+    Route::get('/formsakit', [AbsenSiswaController::class, 'sakit'])->name('form.sakit');
+    Route::get('/formizin', [AbsenSiswaController::class, 'izin'])->name('form.izin');
+    Route::post('/formsakit/submit', [AbsenSiswaController::class, 'sakitstore'])->name('sakit.store');
+    Route::post('/formizin/submit', [AbsenSiswaController::class, 'izinstore'])->name('izin.store');
+
+    // PROFILE
+    Route::get('/profile', [AbsenSiswaController::class, 'editprofile'])->name('profile');
+    Route::post('/editprofile', [AbsenSiswaController::class, 'profilesubmit'])->name('profile.submit');
 });
 
 // OPERATOR LOKASI

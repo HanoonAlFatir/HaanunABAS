@@ -40,7 +40,7 @@
             <div id="user-detail" class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div class="avatar">
-                        <img src="{{ asset('assets/siswa/img/sample/avatar/avatar1.jpg') }}" alt="avatar"
+                        <img src="{{ asset('storage/user_avatar/' . $user->foto) }}" alt="avatar"
                             class="imaged w64 rounded">
                     </div>
                     <div id="user-info" class="ml-3">
@@ -48,14 +48,21 @@
                         <span id="user-role">XII RPL 1</span>
                     </div>
                 </div>
-                <div>
-                    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-link"
-                            style="color: inherit; text-decoration: none; background-color: #ffffff; color: white; padding: 10px 20px; border-radius: 5px; border: none; transition: background-color 0.3s;">
-                            <ion-icon name="log-out-outline"></ion-icon> Logout
-                        </button>
-                    </form>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{{ route('profile') }}">Profile</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,32 +82,16 @@
 
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
-        <a href="#" class="item">
+        <a href="{{ route('siswa.dashboard') }}" class="item">
             <div class="col">
-                <ion-icon name="file-tray-full-outline" role="img" class="md hydrated"
-                    aria-label="file tray full outline"></ion-icon>
-                <strong>Today</strong>
-            </div>
-        </a>
-        <a href="#" class="item active">
-            <div class="col">
-                <ion-icon name="calendar-outline" role="img" class="md hydrated"
-                    aria-label="calendar outline"></ion-icon>
-                <strong>Calendar</strong>
+                <ion-icon name="home-outline" role="img" class="md hydrated"></ion-icon>
+                <strong>Beranda</strong>
             </div>
         </a>
         <a href="#" class="item">
             <div class="col">
-                <ion-icon name="document-text-outline" role="img" class="md hydrated"
-                    aria-label="document text outline"></ion-icon>
-                <strong>Docs</strong>
-            </div>
-        </a>
-        <a href="javascript:;" class="item">
-            <div class="col">
-                <ion-icon name="people-outline" role="img" class="md hydrated"
-                    aria-label="people outline"></ion-icon>
-                <strong>Profile</strong>
+                <ion-icon name="file-tray-full-outline" role="img" class="md hydrated"></ion-icon>
+                <strong>Rekap</strong>
             </div>
         </a>
     </div>
@@ -380,7 +371,7 @@
     <script src="{{ asset('assets/siswa/js/facedtc_and_coordinates.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script> --}}
     <script src="{{ asset('assets/face-api.js-master/dist/face-api.min.js') }}"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -432,6 +423,29 @@
                 am4core.color("#ba113b"),
             ];
         }); // end am4core.ready()
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdownBtn = document.querySelector('.dropbtn');
+            var dropdownContent = document.querySelector('.dropdown-content');
+
+            dropdownBtn.addEventListener('click', function() {
+                // Toggle visibility of the dropdown content
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
+                    'block';
+            });
+
+            // Menutup dropdown jika klik di luar
+            document.addEventListener('click', function(event) {
+                if (!dropdownBtn.contains(event.target) && !dropdownContent.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        })
+
+        document.getElementById('logout-link').addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah link default behavior
+            document.getElementById('logout-form').submit(); // Submit form secara manual
+        });
     </script>
 
 </body>

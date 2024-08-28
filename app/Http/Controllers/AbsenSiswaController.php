@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\Koordinat_Sekolah;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class AbsenSiswaController extends Controller
             if ($cek->jam_masuk && ($cek->photo_out || $cek->titik_koordinat_pulang)) {
                 $statusAbsen = 'Sudah Pulang';
             } elseif ($cek->jam_masuk) {
-                $statusAbsen = 'Hadir';
+                $statusAbsen = $cek->status;
             }
         } else {
             $statusAbsen = 'Belum Absen';
@@ -53,6 +54,7 @@ class AbsenSiswaController extends Controller
             // 'tingkat' => $kelas->tingkat,
             // 'nama_jurusan' => $kelas->nama_jurusan,
             // 'nomor_kelas' => $kelas->nomor_kelas
+            'user' => $user,
         ]);
     }
 
@@ -68,7 +70,7 @@ class AbsenSiswaController extends Controller
         $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
         $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
         $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
-        return view('siswa.absen', compact('lok_sekolah', 'waktu', 'cek'));
+        return view('siswa.absen', compact('lok_sekolah', 'waktu', 'cek', 'user'));
     }
 
     /**
@@ -116,10 +118,10 @@ class AbsenSiswaController extends Controller
         }
 
         $cek = DB::table('absensis')->where('date', $date)->where('nis', $nis)->count();
-        if ($radius > $radiussekolah) {
-            echo "error|Anda Berada Diluar Radius, Jarak Anda " . $radius . " meter dari Sekolah|";
-        }
-         if ($faceConfidence < 0.70) { // Confidence threshold
+        // if ($radius > $radiussekolah) {
+        //     echo "error|Anda Berada Diluar Radius, Jarak Anda " . $radius . " meter dari Sekolah|";
+        // }
+         if ($faceConfidence < 0.85) { // Confidence threshold
             echo "error|Wajah Tidak Terdeteksi dengan Kepastian 90%|";
         } else {
             if ($cek > 0) {
@@ -171,6 +173,173 @@ class AbsenSiswaController extends Controller
         return compact('meters');
     }
 
+    public function sakit()
+    {
+        $user = Auth::user();
+        $nis = $user->siswa->nis;
+        $hariini = date("Y-m-d");
+        $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
+        $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
+        $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
+        return view('siswa.sakit', compact('lok_sekolah', 'waktu', 'cek'));
+    }
+
+    public function sakitstore(Request $request)
+    {
+        $request->validate([
+            'photo_in' => 'required|mimes:jpeg,png,jpg,pdf|max:10000',
+            'keterangan' => 'required|string|max:255',
+        ]);
+
+        $status = $request->input('status', 'Sakit');
+
+        if ($request->hasFile('photo_in')) {
+            $user = Auth::user();
+            $nis = $user->siswa->nis;
+            $date = date("Y-m-d");
+            $keterangan = $request->input('keterangan');
+            $jam = date("H:i:s");
+
+            $lokasiSiswa = $request->lokasi;
+            $foto = $request->file('photo_in');
+
+            $extension = $foto->getClientOriginalExtension();
+            $folderPath = "public/uploads/absensi/";
+            $fileName = $nis . "-" . $date . "-" . $status . "." . $extension;
+            $file = $folderPath . $fileName;
+
+
+            $data = [
+                'nis' => $nis,
+                'status' => $status,
+                'photo_in' => $fileName,
+                'keterangan' => $keterangan,
+                'date' => $date,
+                'jam_masuk' => $jam,
+                'titik_koordinat_masuk' => $lokasiSiswa,
+            ];
+
+            $simpan = DB::table('absensis')->insert($data);
+            if ($simpan) {
+                Storage::put($file, file_get_contents($foto));
+                return redirect()->route('siswa.dashboard')->with('success', 'Absensi berhasil disimpan!');
+            } else {
+                return redirect()->route('form.sakit')->with('error', 'Gagal');
+            }
+        }
+    }
+
+    public function izin()
+    {
+        $user = Auth::user();
+        $nis = $user->siswa->nis;
+        $hariini = date("Y-m-d");
+        $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
+        $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
+        $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
+        return view('siswa.izin', compact('lok_sekolah', 'waktu', 'cek'));
+    }
+
+    public function izinstore(Request $request)
+    {
+        $request->validate([
+            'photo_in' => 'required|mimes:jpeg,png,jpg,pdf|max:10000',
+            'keterangan' => 'required|string|max:255',
+        ]);
+
+        $status = $request->input('status', 'Izin');
+
+        if ($request->hasFile('photo_in')) {
+            $user = Auth::user();
+            $nis = $user->siswa->nis;
+            $date = date("Y-m-d");
+            $keterangan = $request->input('keterangan');
+            $jam = date("H:i:s");
+
+            $lokasiSiswa = $request->lokasi;
+            $foto = $request->file('photo_in');
+
+            $extension = $foto->getClientOriginalExtension();
+            $folderPath = "public/uploads/absensi/";
+            $fileName = $nis . "-" . $date . "-" . $status . "." . $extension;
+            $file = $folderPath . $fileName;
+
+
+            $data = [
+                'nis' => $nis,
+                'status' => $status,
+                'photo_in' => $fileName,
+                'keterangan' => $keterangan,
+                'date' => $date,
+                'jam_masuk' => $jam,
+                'titik_koordinat_masuk' => $lokasiSiswa,
+            ];
+
+            $simpan = DB::table('absensis')->insert($data);
+            if ($simpan) {
+                Storage::put($file, file_get_contents($foto));
+                return redirect()->route('siswa.dashboard')->with('success', 'Absensi berhasil disimpan!');
+            } else {
+                return redirect()->route('form.izin')->with('error', 'Gagal');
+            }
+        }
+    }
+
+    public function editprofile()
+    {
+        $user = Auth::user();
+        $nis = $user->siswa->nis;
+        $hariini = date("Y-m-d");
+        $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
+        $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
+        $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
+        return view('siswa.profile', compact('user','lok_sekolah', 'waktu', 'cek'));
+    }
+
+    public function profilesubmit(Request $request)
+    {
+        $f=false;
+        $p=false;
+
+        //password
+        if ($request->password != $request->kPassword) {
+            return redirect()->back()->with('failed', 'Password Berbeda');
+        }
+        $count = strlen($request->password);
+        if ($count > 0) {
+            $p = User::where('id', $request->id)->update([
+                'password' => password_hash($request->password, PASSWORD_DEFAULT)
+            ]);
+        }
+
+        //foto
+        if ($request->hasFile('foto'))
+        {
+            $foto = $request->file('foto');
+
+            $folderPath = "public/user_avatar/";
+
+            $extension = $foto->getClientOriginalExtension();
+            $fileName = $request->nis . '.' . $extension;
+            $file = $folderPath . $fileName;
+
+            Storage::put($file, file_get_contents($foto));
+
+            User::where('id', $request->id)->update([
+                'foto' => $fileName
+            ]);
+        }
+
+        $u = User::where('id', $request->id)->update([
+            'email' => $request->email,
+        ]);
+
+        if ($u || $f || $p) {
+            return redirect()->back()->with('success', "Data Berhasil di Update");
+        } else {
+            return redirect()->back()->with('failed', "Data Gagal di Update");
+        }
+    }
     /**
      * Display the specified resource.
      */

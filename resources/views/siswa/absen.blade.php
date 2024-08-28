@@ -55,7 +55,7 @@
                                 </div>
                                 <!-- Map Section -->
                                 <div class="col-12 col-lg-6">
-                                    <div id="map" style="height: 300px;"></div>
+                                    <div id="map" style="height: 505px;"></div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="button-group mt-3 mb-3">
