@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
 use App\Models\Kelas;
 use App\Models\Koordinat_Sekolah;
 use App\Models\Siswa;
@@ -41,7 +42,17 @@ class AbsenSiswaController extends Controller
         $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
         $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
         $presensi_hari_ini = DB::table('absensis')->where('nis', $nis)->where('jam_masuk');
-        $siswa = Siswa::with('user')->get();
+        $siswa = Siswa::with('kelas')->where('id_user', $user->id)->first();
+        if ($siswa) {
+            $kelas = $siswa->kelas;
+            $tingkat = $kelas->tingkat;
+            $nama_jurusan = $kelas->jurusan->id_jurusan;
+            $nomor_kelas = $kelas->nomor_kelas;
+        } else {
+            $tingkat = 'Tingkat tidak ditemukan';
+            $nama_jurusan = 'Jurusan tidak ditemukan';
+            $nomor_kelas = 'Nomor kelas tidak ditemukan';
+        }
         return view('siswa.dashboardsiswa', [
             'waktu' => $waktu,
             'cek' => $cek ? 1 : 0,
@@ -55,6 +66,9 @@ class AbsenSiswaController extends Controller
             // 'nama_jurusan' => $kelas->nama_jurusan,
             // 'nomor_kelas' => $kelas->nomor_kelas
             'user' => $user,
+            'tingkat' => $tingkat,
+            'nama_jurusan' => $nama_jurusan,
+            'nomor_kelas' => $nomor_kelas,
         ]);
     }
 
@@ -70,7 +84,20 @@ class AbsenSiswaController extends Controller
         $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
         $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
         $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
-        return view('siswa.absen', compact('lok_sekolah', 'waktu', 'cek', 'user'));
+        $siswa = Siswa::with('kelas')->where('id_user', $user->id)->first();
+        if ($siswa) {
+            $kelas = $siswa->kelas;
+            $tingkat = $kelas->tingkat;
+            $nama_jurusan = $kelas->jurusan->id_jurusan;
+            $nomor_kelas = $kelas->nomor_kelas;
+        } else {
+            $tingkat = 'Tingkat tidak ditemukan';
+            $nama_jurusan = 'Jurusan tidak ditemukan';
+            $nomor_kelas = 'Nomor kelas tidak ditemukan';
+        }
+        $absensi = Absensi::where('nis', $nis)->where('date', $hariini)->paginate(7);
+        // return view('siswa.rekap', compact('absensi',  'jumlahHadir', 'jumlahIzin', 'jumlahTerlambat', 'jumlahAlfa', 'jumlahTap', 'totalKeterlambatan', 'persentaseHadir'));
+        return view('siswa.absen', compact('lok_sekolah', 'waktu', 'cek', 'user', 'siswa', 'tingkat', 'nama_jurusan', 'nomor_kelas'));
     }
 
     /**
@@ -181,7 +208,18 @@ class AbsenSiswaController extends Controller
         $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
         $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
         $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
-        return view('siswa.sakit', compact('lok_sekolah', 'waktu', 'cek'));
+        $siswa = Siswa::with('kelas')->where('id_user', $user->id)->first();
+        if ($siswa) {
+            $kelas = $siswa->kelas;
+            $tingkat = $kelas->tingkat;
+            $nama_jurusan = $kelas->jurusan->id_jurusan;
+            $nomor_kelas = $kelas->nomor_kelas;
+        } else {
+            $tingkat = 'Tingkat tidak ditemukan';
+            $nama_jurusan = 'Jurusan tidak ditemukan';
+            $nomor_kelas = 'Nomor kelas tidak ditemukan';
+        }
+        return view('siswa.sakit', compact('lok_sekolah', 'waktu', 'cek', 'user', 'siswa', 'tingkat', 'nama_jurusan', 'nomor_kelas'));
     }
 
     public function sakitstore(Request $request)
@@ -237,7 +275,18 @@ class AbsenSiswaController extends Controller
         $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
         $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
         $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
-        return view('siswa.izin', compact('lok_sekolah', 'waktu', 'cek'));
+        $siswa = Siswa::with('kelas')->where('id_user', $user->id)->first();
+        if ($siswa) {
+            $kelas = $siswa->kelas;
+            $tingkat = $kelas->tingkat;
+            $nama_jurusan = $kelas->jurusan->id_jurusan;
+            $nomor_kelas = $kelas->nomor_kelas;
+        } else {
+            $tingkat = 'Tingkat tidak ditemukan';
+            $nama_jurusan = 'Jurusan tidak ditemukan';
+            $nomor_kelas = 'Nomor kelas tidak ditemukan';
+        }
+        return view('siswa.izin', compact('lok_sekolah', 'waktu', 'cek', 'user', 'siswa', 'tingkat', 'nama_jurusan', 'nomor_kelas'));
     }
 
     public function izinstore(Request $request)
@@ -293,7 +342,18 @@ class AbsenSiswaController extends Controller
         $cek = DB::table('absensis')->where('date', $hariini)->where('nis', $nis)->count();
         $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
         $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
-        return view('siswa.profile', compact('user','lok_sekolah', 'waktu', 'cek'));
+        $siswa = Siswa::with('kelas')->where('id_user', $user->id)->first();
+        if ($siswa) {
+            $kelas = $siswa->kelas;
+            $tingkat = $kelas->tingkat;
+            $nama_jurusan = $kelas->jurusan->id_jurusan;
+            $nomor_kelas = $kelas->nomor_kelas;
+        } else {
+            $tingkat = 'Tingkat tidak ditemukan';
+            $nama_jurusan = 'Jurusan tidak ditemukan';
+            $nomor_kelas = 'Nomor kelas tidak ditemukan';
+        }
+        return view('siswa.profile', compact('user','lok_sekolah', 'waktu', 'cek', 'siswa', 'tingkat', 'nama_jurusan', 'nomor_kelas'));
     }
 
     public function profilesubmit(Request $request)
@@ -339,6 +399,68 @@ class AbsenSiswaController extends Controller
         } else {
             return redirect()->back()->with('failed', "Data Gagal di Update");
         }
+    }
+
+    public function rekap(Request $request)
+    {
+        $user = Auth::user();
+        $nis = $user->siswa->nis;
+        $lok_sekolah = DB::table('koordinat_sekolahs')->where('id_koordinat_sekolah', 1)->first();
+        $waktu = DB::table('waktu__absens')->where('id_waktu_absen', 1)->first();
+
+        $start_date = $request->input('start_date', date('Y-m-d'));
+        $end_date = $request->input('end_date', date('Y-m-d'));
+
+        $allAbsensi = Absensi::where('nis', $nis)
+            ->whereBetween('date', [$start_date, $end_date])
+            ->get();
+
+        $stats = $this->filterRekap($allAbsensi);
+
+
+        $absensi = Absensi::where('nis', $nis)
+            ->whereBetween('date', [$start_date, $end_date])
+            ->paginate(5)
+            ->appends($request->only(['start_date', 'end_date']));
+
+        $siswa = Siswa::with('kelas')->where('id_user', $user->id)->first();
+        if ($siswa) {
+            $kelas = $siswa->kelas;
+            $tingkat = $kelas->tingkat;
+            $nama_jurusan = $kelas->jurusan->id_jurusan;
+            $nomor_kelas = $kelas->nomor_kelas;
+        } else {
+            $tingkat = 'Tingkat tidak ditemukan';
+            $nama_jurusan = 'Jurusan tidak ditemukan';
+            $nomor_kelas = 'Nomor kelas tidak ditemukan';
+        }
+        return view('siswa.rekap',array_merge(
+            compact('user','lok_sekolah', 'waktu', 'siswa', 'tingkat', 'nama_jurusan', 'nomor_kelas', 'absensi', 'start_date', 'end_date'),
+            $stats
+        ));
+    }
+
+    private function filterRekap($absensi)
+    {
+        $jumlahHadir = $absensi->where('status', 'Hadir')->count();
+        $jumlahIzin = $absensi->whereIn('status', ['Sakit', 'Izin'])->count();
+        $jumlahTerlambat = $absensi->where('status', 'Terlambat')->count();
+        $jumlahAlfa = $absensi->where('status', 'Alfa')->count();
+        $jumlahTap = $absensi->where('status', 'TAP')->count();
+        $totalKeterlambatan = $absensi->sum('menit_keterlambatan');
+
+        $totalAbsensi = $absensi->count();
+        $persentaseHadir = $totalAbsensi > 0 ? round(($jumlahHadir / $totalAbsensi) * 100) : 0;
+
+        return compact(
+            'jumlahHadir',
+            'jumlahIzin',
+            'jumlahTerlambat',
+            'jumlahAlfa',
+            'jumlahTap',
+            'totalKeterlambatan',
+            'persentaseHadir'
+        );
     }
     /**
      * Display the specified resource.

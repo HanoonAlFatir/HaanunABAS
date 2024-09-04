@@ -287,7 +287,7 @@
                         <a href="{{ route('siswa.absen') }}">
                             @if ($cek > 0)
                                 <button class="buttonabsen"
-                                    style="@if ($isAbsenMasukDisabled || $isAbsenPulang || $isIzin) background-color: #593BDB; color: white; @endif"
+                                    style=" background-color: #593BDB; color: white; @if ($isAbsenMasukDisabled || $isAbsenPulang || $isIzin) background-color: #593BDB; color: white; @endif"
                                     @if ($isAbsenMasukDisabled || $isAbsenPulang || $isIzin) disabled @endif type="button">
                                     <div class="absencontent">
                                         <div class="absendetail">
@@ -319,6 +319,30 @@
                                 </button>
                             @endif
                         </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow-sm p-3">
+                        <ul class="nav nav-tabs" id="rekapTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="bulan-ini-tab" data-toggle="tab" href="#bulan-ini" role="tab" aria-controls="bulan-ini" aria-selected="true">Rekap Bulan Ini</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="bulan-sebelumnya-tab" data-toggle="tab" href="#bulan-sebelumnya" role="tab" aria-controls="bulan-sebelumnya" aria-selected="false">Rekap Bulan Sebelumnya</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content mt-3" id="rekapTabsContent">
+                            <div class="tab-pane fade show active" id="bulan-ini" role="tabpanel" aria-labelledby="bulan-ini-tab">
+                                <h5>Rekap Kehadiran Bulan Ini</h5>
+                                <!-- Tambahkan konten rekap bulan ini di sini -->
+                            </div>
+                            <div class="tab-pane fade" id="bulan-sebelumnya" role="tabpanel" aria-labelledby="bulan-sebelumnya-tab">
+                                <h5>Rekap Kehadiran Bulan Sebelumnya</h5>
+                                <!-- Tambahkan konten rekap bulan sebelumnya di sini -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

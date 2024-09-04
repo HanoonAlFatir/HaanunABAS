@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             KoordinatSeeder::class,
             WaktuSeeder::class,
+            AbsensiSeeder::class,
         ]);
     }
 }

@@ -14,6 +14,7 @@ class Absensi extends Model
         'status',
         'photo_in',
         'photo_out',
+        'keterangan',
         'date',
         'jam_masuk',
         'jam_pulang',

@@ -58,6 +58,9 @@ Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
     // PROFILE
     Route::get('/profile', [AbsenSiswaController::class, 'editprofile'])->name('profile');
     Route::post('/editprofile', [AbsenSiswaController::class, 'profilesubmit'])->name('profile.submit');
+
+    // REKAP
+    Route::get('/rekap', [AbsenSiswaController::class, 'rekap'])->name('siswa.rekap');
 });
 
 // OPERATOR LOKASI

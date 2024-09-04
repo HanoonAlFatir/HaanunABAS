@@ -8071,6 +8071,10 @@ body.dark-mode-active .cart-item .cart-item-footer {
     margin: 5px 0;
 }
 
+.bottomnavmargin {
+    margin-bottom: 100px;
+}
+
 @media (max-width: 576px) {
     .button-group button {
         font-size: 0.8rem;

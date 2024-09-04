@@ -45,7 +45,7 @@
                     </div>
                     <div id="user-info" class="ml-3">
                         <h2 id="user-name">{{ Auth::user()->name }}</h2>
-                        <span id="user-role">XII RPL 1</span>
+                        <span id="user-role">{{ $tingkat }} {{ $nama_jurusan }} {{ $nomor_kelas }}</span>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -88,7 +88,7 @@
                 <strong>Beranda</strong>
             </div>
         </a>
-        <a href="#" class="item">
+        <a href="{{ route('siswa.rekap') }}" class="item">
             <div class="col">
                 <ion-icon name="file-tray-full-outline" role="img" class="md hydrated"></ion-icon>
                 <strong>Rekap</strong>
@@ -354,9 +354,16 @@
     <!-- Bootstrap-->
     <script src="{{ asset('assets/siswa/js/lib/popper.min.js') }} "></script>
     <script src="{{ asset('assets/siswa/js/lib/bootstrap.min.js') }} "></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Owl Carousel -->
     <script src="{{ asset('assets/siswa/js/plugins/owl-carousel/owl.carousel.min.js') }} "></script>
     <!-- jQuery Circle Progress -->
@@ -364,6 +371,7 @@
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <!-- Base Js File -->
     <script src="{{ asset('assets/siswa/js/base.js') }} "></script>
 
