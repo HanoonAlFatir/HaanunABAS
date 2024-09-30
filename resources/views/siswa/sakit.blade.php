@@ -50,12 +50,22 @@
                             <div class="row">
                                 <input type="hidden" id="lokasi" name="lokasi">
                                 <div class="col-md-6 mb-3">
-                                    <input type="file" id="avatar" name="photo_in" accept="image/png, image/jpeg"/>
+                                    {{-- <input type="file" id="avatar" name="photo_in" accept="image/png, image/jpeg"/> --}}
+                                    <label class="form-label">Upload File</label>
+                                    <div class="custom-file-upload">
+                                        <input type="file" id="upload" name="photo_in" accept="image/png, image/jpeg, image/jpg">
+                                        <label for="upload">
+                                            <span>
+                                                <i class="icon">+</i>
+                                                <strong>Upload new photo</strong>
+                                            </span>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label for="keterangan" class="form-label">Keterangan</label>
-                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Isi keterangan"></textarea>
+                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="5" placeholder="Isi keterangan"></textarea>
                                     </div>
                                 </div>
                             </div>

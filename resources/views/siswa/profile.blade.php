@@ -18,7 +18,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 col-md-4 d-flex justify-content-center mb-3 mb-md-0">
-                                            <img src="{{ asset('storage/user_avatar/' . $user->foto) }}" alt="" class="d-block rounded" height="200" width="200">
+                                            <img src="{{ asset('storage/user_avatar/' . $user->foto) }}" alt="" class="d-block imaged rounded" height="200" width="200">
                                         </div>
                                         <div class="col-12 col-md-8 d-flex flex-column justify-content-center">
                                             <div class="button-wrapper">
@@ -40,18 +40,18 @@
                                 <hr class="my-0">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="mb-3 col-12 col-md-6">
+                                        <div class="mb-2 col-12 col-md-12">
                                             <label for="Nama" class="form-label">Nama Panjang</label>
                                             <input class="form-control" type="text" id="Nama" value="{{ $user->name }}" disabled>
                                         </div>
 
-                                        <div class="mb-3 col-12 col-md-6">
+                                        <div class="mb-2 col-12 col-md-12">
                                             <label for="NIS" class="form-label">NIS</label>
                                             <input class="form-control" type="text" id="NIS" value="{{ $user->siswa->nis }}" disabled>
                                             <input type="hidden" name="nis" value="{{ $user->siswa->nis }}">
                                         </div>
 
-                                        <div class="mb-3 col-12 col-md-6">
+                                        <div class="mb-2 col-12 col-md-12">
                                             <label for="Email" class="form-label">Email</label>
                                             <input class="form-control" type="email" id="Email" name="email" value="{{ $user->email }}">
                                         </div>
@@ -60,6 +60,7 @@
                                         <div class="mb-3 col-12 col-md-6">
                                             <label for="password" class="form-label">Ganti Password</label>
                                             <input class="form-control" type="password" id="password" name="password" placeholder="Masukkan password baru">
+                                            <small class="form-text text-muted">Kosongkan jika tidak ingin mengubah password.</small>
                                         </div>
 
                                         <div class="mb-3 col-12 col-md-6">
@@ -68,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-2 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </div>
                             </div>

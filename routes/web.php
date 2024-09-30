@@ -10,6 +10,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AbsenSiswaController;
+use App\Http\Controllers\WaliSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,9 @@ use App\Http\Controllers\AbsenSiswaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Auth::routes();
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -34,14 +38,13 @@ Route::get('/', function () {
             return redirect('wali');
         } elseif ($role == 'operator') {
             return redirect('operator');
+        } elseif ($role == 'ortu') {
+            return redirect('ortu');
         }
     }
     return view('login-page-user');
 });
 
-
-
-Auth::routes();
 
 Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
     // ABSEN
@@ -108,4 +111,8 @@ Route::middleware(['auth', 'Operator:operator'])->group(function() {
 Route::middleware(['auth', 'Kesiswaan:kesiswaan'])->group(function() {
     Route::get('/kesiswaan', [App\Http\Controllers\KesiswaanController::class, 'index'])->name('kesiswaan');
 
+});
+
+Route::middleware(['auth', 'Ortu:ortu'])->group(function() {
+    Route::get('/ortu', [WaliSiswaController::class, 'index'])->name('ortu');
 });

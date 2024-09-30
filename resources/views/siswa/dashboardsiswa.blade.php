@@ -324,8 +324,8 @@
             </div>
             <div class="row mt-4">
                 <div class="col-12">
-                    <div class="card shadow-sm p-3">
-                        <ul class="nav nav-tabs" id="rekapTabs" role="tablist">
+                    <div class="card p-3">
+                        <ul class="nav nav-tabs nav-fill" id="rekapTabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="bulan-ini-tab" data-toggle="tab" href="#bulan-ini" role="tab" aria-controls="bulan-ini" aria-selected="true">Rekap Bulan Ini</a>
                             </li>
@@ -335,12 +335,206 @@
                         </ul>
                         <div class="tab-content mt-3" id="rekapTabsContent">
                             <div class="tab-pane fade show active" id="bulan-ini" role="tabpanel" aria-labelledby="bulan-ini-tab">
-                                <h5>Rekap Kehadiran Bulan Ini</h5>
-                                <!-- Tambahkan konten rekap bulan ini di sini -->
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <div class="progress mb-1" style="position: relative; height: 30px;">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        style="width: {{ $persentaseHadirBulanIni }}%; height: 30px;"
+                                        aria-valuenow="{{ $persentaseHadirBulanIni }}" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                    <span
+                                        style="position: absolute; width: 100%; text-align: center; line-height: 30px; color: black;">
+                                        {{ $persentaseHadirBulanIni }}%
+                                    </span>
+                                </div>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasigreen">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Hadir</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanIni['Hadir'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasidarkyellow">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Sakit</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanIni['Sakit'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasiblue">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Izin</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanIni['Izin'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasired">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Alfa</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanIni['Alfa'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasigray">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Terlambat</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanIni['Terlambat'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasisoftblue">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah TAP</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanIni['TAP'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="bulan-sebelumnya" role="tabpanel" aria-labelledby="bulan-sebelumnya-tab">
-                                <h5>Rekap Kehadiran Bulan Sebelumnya</h5>
-                                <!-- Tambahkan konten rekap bulan sebelumnya di sini -->
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <div class="progress mb-3" style="position: relative; height: 30px;">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        style="width: {{ $persentaseHadirBulanSebelumnya }}%; height: 30px;"
+                                        aria-valuenow="{{ $persentaseHadirBulanSebelumnya }}" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                    <span
+                                        style="position: absolute; width: 100%; text-align: center; line-height: 30px; color: white;">
+                                        {{ $persentaseHadirBulanSebelumnya }}%
+                                    </span>
+                                </div>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasigreen">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Hadir</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanSebelumnya['Hadir'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasidarkyellow">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Sakit</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanSebelumnya['Sakit'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasiblue">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Izin</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanSebelumnya['Izin'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasired">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Alfa</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanSebelumnya['Alfa'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasigray">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah Terlambat</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanSebelumnya['Terlambat'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2 mb-3">
+                                        <div class="card gradasisoftblue">
+                                            <button class="buttonform" disabled>
+                                                <div class="card-body">
+                                                    <div class="absencontent">
+                                                        <div class="absendetail">
+                                                            <h4 class="presencetitle rekapadjust">Jumlah TAP</h4>
+                                                            <span class="rekapcontent">{{ $dataBulanSebelumnya['TAP'] ?? 0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

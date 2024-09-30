@@ -41,13 +41,15 @@
                                         <div class="col-12">
                                             @if ($cek > 0)
                                                 <div class="button-group mb-3">
-                                                    <button class="btn btn-primary w-100" type="button" id="absen"><ion-icon
-                                                            name="cloud-upload-outline"></ion-icon> Absen Pulang</button>
+                                                    <button class="btn btn-primary w-100" type="button"
+                                                        id="absen"><ion-icon name="cloud-upload-outline"></ion-icon>
+                                                        Absen Pulang</button>
                                                 </div>
                                             @else
                                                 <div class="button-group mb-3">
-                                                    <button class="btn btn-primary w-100" type="button" id="absen"><ion-icon
-                                                            name="cloud-upload-outline"></ion-icon> Absen Masuk</button>
+                                                    <button class="btn btn-primary w-100" type="button"
+                                                        id="absen"><ion-icon name="cloud-upload-outline"></ion-icon>
+                                                        Absen Masuk</button>
                                                 </div>
                                             @endif
                                         </div>
@@ -55,11 +57,12 @@
                                 </div>
                                 <!-- Map Section -->
                                 <div class="col-12 col-lg-6">
-                                    <div id="map" style="height: 505px;"></div>
+                                    <div id="map"></div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="button-group mt-3 mb-3">
-                                                <small class="form-text text-muted">Pastikan anda sudah berada di dalam radius agar bisa melakukan Absen.</small>
+                                                <small class="form-text text-muted">Pastikan anda sudah berada di dalam
+                                                    radius agar bisa melakukan Absen.</small>
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +87,18 @@
             var lok = lokasi_sekolah.split(",");
             var lat_sekolah = lok[0];
             var long_sekolah = lok[1];
+            // Custom icon for user
+            var userIcon = L.icon({
+                iconUrl: '{{ asset('storage/user_avatar') }}/user_default.png',
+                iconSize: [45, 45], // size of the icon
+                iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
+                popupAnchor: [0, -38],
+                className: 'icon-circle' // point from which the popup should open relative to the iconAnchor
+            });
             var map = L.map('map').setView([lat_sekolah, long_sekolah], 17);
+            var userIcon = L.marker([position.coords.latitude, position.coords.longitude], {
+                icon: userIcon
+            }).addTo(map);
             var radius = "{{ $lok_sekolah->jarak }}"
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -100,8 +114,20 @@
         }
 
         function errorCallback(params) {
-
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    lokasi.innerHTML = "Izin untuk mendapatkan lokasi tidak diberikan oleh pengguna.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    lokasi.innerHTML = "Informasi lokasi tidak tersedia.";
+                    break;
+                case error.TIMEOUT:
+                    lokasi.innerHTML = "Waktu permintaan lokasi habis.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    lokasi.innerHTML = "Terjadi kesalahan yang tidak diketahui.";
+                    break;
+            }
         }
-
     </script>
 @endsection

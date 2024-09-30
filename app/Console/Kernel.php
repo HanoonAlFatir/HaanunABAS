@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Waktu_Absen;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $waktu = Waktu_Absen::first();
+        $schedule->command('app:insert-absen')->daily();
+        $schedule->command('app:cek-tap')->at($waktu->batas_pulang);
     }
 
     /**

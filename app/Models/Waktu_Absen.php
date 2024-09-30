@@ -19,6 +19,7 @@ class Waktu_Absen extends Model
         'batas_jam_masuk',
         'jam_pulang',
         'batas_jam_pulang',
+        'toleransi'
     ];
 
     public function waktu_absen()

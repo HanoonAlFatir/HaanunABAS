@@ -1284,6 +1284,38 @@ h6 .badge {
     line-height: 1em;
 }
 
+.badge {
+    font-size: 0.875rem !important; /* Ukuran font yang lebih kecil */
+    padding: 0.5rem 0.75rem !important; /* Padding yang lebih baik */
+    border-radius: 0.725rem !important; /* Radius border */
+    text-transform: capitalize !important; /* Huruf pertama kapital */
+}
+
+.badge.bg-success {
+    background-color: #28a745 !important; /* Warna hijau */
+    color: #fff;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important; /* Warna kuning */
+    color: #212529; /* Warna teks lebih gelap */
+}
+
+.badge.bg-info {
+    background-color: #17a2b8 !important; /* Warna biru terang */
+    color: #fff;
+}
+
+.badge.bg-primary {
+    background-color: #007bff !important; /* Warna biru */
+    color: #fff;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important; /* Warna merah */
+    color: #fff;
+}
+
 .text-muted {
     font-size: 13px;
     color: #4f5050 !important;
@@ -4762,7 +4794,7 @@ textarea,
 
 .progress {
     height: 14px;
-    border-radius: 6px;
+    border-radius: 15px;
 }
 
 .progress-bar {
@@ -6096,42 +6128,48 @@ textarea,
 }
 
 .pagination {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
 }
 
-.pagination .page-item .page-link {
-    background: #1e74fd;
-    border: 0;
+.page-item:first-child .page-link {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.page-link {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
     color: #fff;
-    box-shadow: 0 !important;
-    outline: 0 !important;
-    margin: 0 4px;
-    border-radius: 6px !important;
-    font-size: 13px;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-.pagination .page-item .page-link:focus {
-    box-shadow: none !important;
-}
-
-.pagination.pagination-secondary .page-item .page-link {
-    background: #fff;
-    color: #4f5050;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
-}
-
-.pagination.pagination-rounded .page-item .page-link {
-    border-radius: 400px !important;
-}
-
-.pagination.pagination-square .page-item .page-link {
-    border-radius: 0 !important;
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
 }
 
 .error-page {
@@ -7968,6 +8006,28 @@ body.dark-mode-active .cart-item .cart-item-footer {
             #5FBAF9);
 }
 
+.gradasisoftblue {
+    color: white;
+    background-image: linear-gradient(to bottom right,
+            #5A7DA3, /* Soft Blue */
+            #6A8EB3); /* Slightly Lighter Soft Blue */
+}
+
+.gradasidarkyellow {
+    color: white;
+    background-image: linear-gradient(to bottom right,
+            #FABC3F, /* Dark Goldenrod */
+            #FABC3F); /* Soft Dark Yellow */
+}
+
+.icon-circle {
+    border-radius: 50%;
+    width: 45px; /* Sesuaikan dengan ukuran icon */
+    height: 45px; /* Sesuaikan dengan ukuran icon */
+    object-fit: cover;
+}
+
+
 .iconpresence {
     font-size: 40px;
 }
@@ -8075,6 +8135,22 @@ body.dark-mode-active .cart-item .cart-item-footer {
     margin-bottom: 100px;
 }
 
+.rekapadjust {
+    font-size: 0.825rem;
+}
+
+.rekapcontent {
+    font-size: 0.725rem;
+}
+
+#map {
+    height: 505px;
+}
+
+label {
+    margin-bottom: 0px !important;
+}
+
 @media (max-width: 576px) {
     .button-group button {
         font-size: 0.8rem;
@@ -8131,5 +8207,17 @@ body.dark-mode-active .cart-item .cart-item-footer {
         /* Padding lebih kecil di layar sangat kecil */
         font-size: 0.8rem;
         /* Ukuran font tombol lebih kecil di layar sangat kecil */
+    }
+
+    .rekapadjust {
+        font-size: 0.65rem;
+    }
+
+    .rekapcontent {
+        font-size: 0.655rem;
+    }
+
+    #map {
+        height: 300px;
     }
 }

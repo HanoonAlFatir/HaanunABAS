@@ -40,12 +40,12 @@
             <div id="user-detail" class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div class="avatar">
-                        <img src="{{ asset('storage/user_avatar/' . $user->foto) }}" alt="avatar"
+                        <img src="{{ asset('storage/user_avatar/user_default.png') }}" alt="avatar"
                             class="imaged w64 rounded">
                     </div>
                     <div id="user-info" class="ml-3">
                         <h2 id="user-name">{{ Auth::user()->name }}</h2>
-                        <span id="user-role">{{ $tingkat }} {{ $nama_jurusan }} {{ $nomor_kelas }}</span>
+                        <span id="user-role">Selamat Datang</span>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -67,6 +67,11 @@
             </div>
         </div>
 
+        {{-- <form action="{{route ('logout')}}" method="post">
+            @csrf
+            <button type="submit">logout</button>
+        </form> --}}
+
 
         {{-- CONTENT --}}
         @yield('content')
@@ -77,16 +82,16 @@
 
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
-        <a href="{{ route('siswa.dashboard') }}" class="item">
+        <a href="#" class="item">
             <div class="col">
                 <ion-icon name="home-outline" role="img" class="md hydrated"></ion-icon>
                 <strong>Beranda</strong>
             </div>
         </a>
-        <a href="{{ route('siswa.rekap') }}" class="item">
+        <a href="#" class="item">
             <div class="col">
                 <ion-icon name="file-tray-full-outline" role="img" class="md hydrated"></ion-icon>
-                <strong>Rekap</strong>
+                <strong>Laporan</strong>
             </div>
         </a>
     </div>
@@ -370,17 +375,8 @@
     <!-- Base Js File -->
     <script src="{{ asset('assets/siswa/js/base.js') }} "></script>
 
-    {{-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> --}}
-    <script src="{{ asset('assets/siswa/js/facedtc_and_coordinates.js') }}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script> --}}
-    <script src="{{ asset('assets/face-api.js-master/dist/face-api.min.js') }}"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        var lokasiSekolah = @json($lok_sekolah->titik_koordinat);
-        var radiusSekolah = @json($lok_sekolah->jarak);
         am4core.ready(function() {
 
             // Themes begin
