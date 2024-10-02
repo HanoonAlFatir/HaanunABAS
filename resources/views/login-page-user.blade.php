@@ -42,7 +42,7 @@
                     @csrf
                     <div class="form-group boxed">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
+                            <input type="text" class="form-control" id="email" name="identifier" placeholder="Email address" required>
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>

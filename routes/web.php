@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KesiswaanController;
 use App\Http\Controllers\OperatorController;
@@ -21,25 +22,65 @@ use App\Http\Controllers\WaliSiswaController;
 
 Auth::routes();
 
+// Route::get('/', function () {
+//     if (auth()->check()) {
+//         $role = auth()->user()->role;
+
+//         if ($role == 'kesiswaan') {
+//             return redirect('kesiswaan');
+//         } elseif ($role == 'siswa') {
+//             return redirect('siswa');
+//         } elseif ($role == 'wali') {
+//             return redirect('wali');
+//         } elseif ($role == 'operator') {
+//             return redirect('operator');
+//         } elseif ($role == 'ortu') {
+//             return redirect('ortu');
+//         }
+//     }
+//     return view('login-page-user');
+// })->name('log');
+use App\Http\Controllers\Auth\LoginController;
+
+// Route untuk halaman utama/login
 Route::get('/', function () {
     if (auth()->check()) {
         $role = auth()->user()->role;
 
-        if ($role == 'kesiswaan') {
-            return redirect('kesiswaan');
-        } elseif ($role == 'siswa') {
-            return redirect('siswa');
-        } elseif ($role == 'wali') {
-            return redirect('wali');
-        } elseif ($role == 'operator') {
-            return redirect('operator');
-        } elseif ($role == 'ortu') {
-            return redirect('ortu');
-        }
+        // Redirect sesuai role pengguna
+        return redirect()->to(redirectTo($role));
     }
-    return view('login-page-user');
-});
+    return view('login-page-user'); // Tampilkan halaman login jika belum terautentikasi
+})->name('log');
 
+// Route untuk proses login
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+// Metode untuk mengarahkan ke halaman sesuai role
+function redirectTo($role)
+{
+    switch ($role) {
+        case 'kesiswaan':
+            return 'kesiswaan';
+        case 'siswa':
+            return 'siswa';
+        case 'wali':
+            return 'wali';
+        case 'operator':
+            return 'operator';
+        case 'ortu':
+            return 'ortu';
+        default:
+            return '/'; // Redirect default jika role tidak dikenali
+    }
+}
+
+
+Route::get('/login', function () {
+    return view('login-page-user'); // Menampilkan halaman login
+})->name('login');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
     // ABSEN
@@ -114,6 +155,7 @@ Route::middleware(['auth', 'Kesiswaan:kesiswaan'])->group(function() {
 
 });
 
+// WALI SISWA
 Route::middleware(['auth', 'Ortu:ortu'])->group(function() {
     Route::get('/ortu', [WaliSiswaController::class, 'index'])->name('ortu.dashboard');
     Route::get('/profile', [WaliSiswaController::class, 'profil'])->name('profile');

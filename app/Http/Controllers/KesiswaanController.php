@@ -8,9 +8,7 @@ class KesiswaanController extends Controller
 {
     public function index()
     {
-        return view('kesiswaan.dashboardkesiswaan', [
-            "title" => "Dashboard",
-        ]);
+        return view('kesiswaan.dashboardkesiswaan');
     }
 
     public function update(Request $request, string $id)
