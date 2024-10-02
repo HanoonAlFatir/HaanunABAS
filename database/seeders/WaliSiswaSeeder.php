@@ -14,19 +14,19 @@ class WaliSiswaSeeder extends Seeder
     public function run(): void
     {
         Wali_Siswa::create([
-            'nik' => '2108410',
+            'nik' => '5347370412765277',
             'id_user' => 9,
             'jenis_kelamin' => 'laki laki',
         ]);
 
         Wali_Siswa::create([
-            'nik' => '2108411',
+            'nik' => '8014821110742201',
             'id_user' => 10,
-            'jenis_kelamin' => 'laki laki',
+            'jenis_kelamin' => 'perempuan',
         ]);
 
         Wali_Siswa::create([
-            'nik' => '2108412',
+            'nik' => '5947550102888607',
             'id_user' => 11,
             'jenis_kelamin' => 'laki laki',
         ]);

@@ -72,10 +72,10 @@
                                             <tr>
                                                 <td>{{ $k->id_kelas }}</td>
                                                 <td>{{ $k->jurusan->id_jurusan }}</td>
-                                                <td>{{ $k->walikelas->nuptk }}</td>
+                                                <td>{{ $k->walikelas ? $k->walikelas->nuptk : 'Tidak ada Wali Kelas' }}</td>
                                                 <td>{{ $k->nomor_kelas }}</td>
                                                 <td>{{ $k->tingkat }}</td>
-                                                <td>{{ $k->jumlah_siswa }}</td>
+                                                <td>{{ $k->siswa_count }}</td>
                                                 <td class="row d-flex align-items-center">
                                                     <button class="btn btn-success mr-2 edit-kelas" data-toggle="modal"
                                                         data-target="#editKelasModal{{ $k->id_kelas }}">
@@ -134,11 +134,11 @@
                                                                         <select id="edit_nuptk" name="nuptk"
                                                                             class="form-control" required>
                                                                             <option value="" disabled selected>Pilih
-                                                                                NUPTK</option>
+                                                                                Wali Kelas</option>
                                                                             @foreach ($walikelas as $w)
                                                                                 <option value="{{ $w->nuptk }}">
                                                                                     {{ $w->nuptk }} -
-                                                                                    {{ $w->nama }}</option>
+                                                                                    {{ $w->user->name }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -160,13 +160,6 @@
                                                                             <option value="11">Kelas 11</option>
                                                                             <option value="12">Kelas 12</option>
                                                                         </select>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="edit_jumlah_siswa"
-                                                                            style="color: black">Jumlah Siswa</label>
-                                                                        <input type="text" id="edit_jumlah_siswa"
-                                                                            name="jumlah_siswa" class="form-control"
-                                                                            value="{{ $k->jumlah_siswa }}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -204,6 +197,8 @@
                                 <div class="form-group">
                                     <label for="id_jurusan" style="color: black">ID Jurusan</label>
                                     <select name="id_jurusan" class="form-control" required>
+                                        <option value="" disabled selected>Pilih
+                                            Jurusan</option>
                                         @foreach ($jurusan as $j)
                                             <option value="{{ $j->id_jurusan }}">{{ $j->nama_jurusan }}</option>
                                         @endforeach
@@ -212,8 +207,10 @@
                                 <div class="form-group">
                                     <label for="nuptk" style="color: black">NUPTK</label>
                                     <select name="nuptk" class="form-control" required>
+                                        <option value="" disabled selected>Pilih
+                                            Wali Kelas</option>
                                         @foreach ($walikelas as $w)
-                                            <option value="{{ $w->nuptk }}">{{ $w->nama }}</option>
+                                            <option value="{{ $w->nuptk }}">{{ $w->nuptk }} - {{ $w->user->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -224,10 +221,6 @@
                                 <div class="form-group">
                                     <label for="tingkat" style="color: black">Tingkat</label>
                                     <input type="text" name="tingkat" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="jumlah_siswa" style="color: black">Jumlah Siswa</label>
-                                    <input type="number" name="jumlah_siswa" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -250,15 +243,15 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('import-kelas') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                    <div class="input-group mb-3">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input">
-                                            <label class="custom-file-label">Choose file</label>
-                                        </div>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="import_file">
+                                        <label class="custom-file-label">Choose file</label>
                                     </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>

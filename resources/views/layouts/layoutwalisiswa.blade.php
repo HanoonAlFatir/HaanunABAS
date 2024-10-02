@@ -45,7 +45,7 @@
                     </div>
                     <div id="user-info" class="ml-3">
                         <h2 id="user-name">{{ Auth::user()->name }}</h2>
-                        <span id="user-role">Selamat Datang</span>
+                        <span id="user-role">Selamat Datang Wali</span>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -82,7 +82,7 @@
 
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
-        <a href="#" class="item">
+        <a href="{{ route('ortu.dashboard') }}" class="item">
             <div class="col">
                 <ion-icon name="home-outline" role="img" class="md hydrated"></ion-icon>
                 <strong>Beranda</strong>
@@ -372,6 +372,8 @@
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Base Js File -->
     <script src="{{ asset('assets/siswa/js/base.js') }} "></script>
 

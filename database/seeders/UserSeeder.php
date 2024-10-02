@@ -96,8 +96,8 @@ class UserSeeder extends Seeder
 
         // ID USER 9
         User::create([
-            'name' => 'Cahyadi',
-            'email' => 'cahyadi@gmail.com',
+            'name' => 'Dani Supriyadi',
+            'email' => 'ortu@gmail.com',
             'password' => password_hash("12345678", PASSWORD_DEFAULT),
             'role' => 'ortu',
             'created_at' => now(),
@@ -106,8 +106,8 @@ class UserSeeder extends Seeder
 
         // ID USER 10
         User::create([
-            'name' => 'Asep',
-            'email' => 'asep@gmail.com',
+            'name' => 'Tati Hariyati',
+            'email' => 'ortu2@gmail.com',
             'password' => password_hash("12345678", PASSWORD_DEFAULT),
             'role' => 'ortu',
             'created_at' => now(),
@@ -116,8 +116,8 @@ class UserSeeder extends Seeder
 
         // ID USER 11
         User::create([
-            'name' => 'Agus',
-            'email' => 'agus@gmail.com',
+            'name' => 'Supratman Widodo',
+            'email' => 'ortu3@gmail.com',
             'password' => password_hash("12345678", PASSWORD_DEFAULT),
             'role' => 'ortu',
             'created_at' => now(),

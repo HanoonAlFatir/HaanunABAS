@@ -120,8 +120,19 @@
                 <ul class="metismenu" id="menu">
 
                     <li class="nav-label first">Data Kelas</li>
-                    <li><a class="has-" href="{{ route('operator.index') }}" aria-expanded="false"><i
-                                class="ti-id-badge"></i><span class="nav-text">Wali Kelas</span></a>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                        class="ti-id-badge"></i><span class="nav-text">Wali</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('operator.index') }}">Wali Kelas</a></li>
+                            <li><a href="{{ route('daftarwalisiswa') }}">Wali Siswa</a></li>
+                            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+                                <ul aria-expand ed="false">
+                                    <li><a href="./email-compose.html">Compose</a></li>
+                                    <li><a href="./email-inbox.html">Inbox</a></li>
+                                    <li><a href="./email-read.html">Read</a></li>
+                                </ul>
+                            </li> -->
+                        </ul>
                     </li>
                     <li><a class="has-" href="{{ route('daftarkesiswaan') }}" aria-expanded="false"><i
                                 class="ti-user"></i><span class="nav-text">Kesiswaan</span></a>
@@ -139,22 +150,6 @@
                             <li><a href="./index.html">Dashboard 1</a></li>
                         </ul> -->
                     </li>
-
-                    {{-- <li class="nav-label">Rekap</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                        class="icon icon-app-store"></i><span class="nav-text">Data</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="./data-siswa.html">Siswa</a></li>
-                            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./email-compose.html">Compose</a></li>
-                                    <li><a href="./email-inbox.html">Inbox</a></li>
-                                    <li><a href="./email-read.html">Read</a></li>
-                                </ul>
-                            </li> -->
-                            <li><a href="./data-guru.html">Guru</a></li>
-                        </ul>
-                    </li> --}}
                 </ul>
             </div>
         </div>

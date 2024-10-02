@@ -445,7 +445,7 @@
                                         aria-valuenow="{{ $persentaseHadirBulanSebelumnya }}" aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                     <span
-                                        style="position: absolute; width: 100%; text-align: center; line-height: 30px; color: white;">
+                                        style="position: absolute; width: 100%; text-align: center; line-height: 30px; color: black;">
                                         {{ $persentaseHadirBulanSebelumnya }}%
                                     </span>
                                 </div>
