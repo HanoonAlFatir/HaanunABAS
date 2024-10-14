@@ -7,6 +7,7 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaliSiswaController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,26 +23,6 @@ use App\Http\Controllers\WaliSiswaController;
 
 Auth::routes();
 
-// Route::get('/', function () {
-//     if (auth()->check()) {
-//         $role = auth()->user()->role;
-
-//         if ($role == 'kesiswaan') {
-//             return redirect('kesiswaan');
-//         } elseif ($role == 'siswa') {
-//             return redirect('siswa');
-//         } elseif ($role == 'wali') {
-//             return redirect('wali');
-//         } elseif ($role == 'operator') {
-//             return redirect('operator');
-//         } elseif ($role == 'ortu') {
-//             return redirect('ortu');
-//         }
-//     }
-//     return view('login-page-user');
-// })->name('log');
-use App\Http\Controllers\Auth\LoginController;
-
 // Route untuk halaman utama/login
 Route::get('/', function () {
     if (auth()->check()) {
@@ -54,7 +35,7 @@ Route::get('/', function () {
 })->name('log');
 
 // Route untuk proses login
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Metode untuk mengarahkan ke halaman sesuai role
 function redirectTo($role)
@@ -75,12 +56,6 @@ function redirectTo($role)
     }
 }
 
-
-Route::get('/login', function () {
-    return view('login-page-user'); // Menampilkan halaman login
-})->name('login');
-
-Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth', 'Siswa:siswa'])->group(function() {
     // ABSEN
@@ -151,7 +126,9 @@ Route::middleware(['auth', 'Operator:operator'])->group(function() {
 
 // KESISWAAN
 Route::middleware(['auth', 'Kesiswaan:kesiswaan'])->group(function() {
-    Route::get('/kesiswaan', [App\Http\Controllers\KesiswaanController::class, 'index'])->name('kesiswaan');
+    Route::get('/kesiswaan', [KesiswaanController::class, 'index'])->name('kesiswaan');
+    Route::get('/laporan', [KesiswaanController::class, 'laporan'])->name('laporan');
+    Route::get('/laporan/daftarsiswa/{kelas_id}', [KesiswaanController::class, 'laporanSiswa'])->name('kesiswaan.daftarsiswa');
 
 });
 

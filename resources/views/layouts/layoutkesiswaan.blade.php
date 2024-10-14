@@ -13,6 +13,10 @@
     <link href="{{ asset('assets/kesiswaan/vendor/datatables/css/jquery.dataTables.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/vendor/chartist/css/chartist.min.css') }} " rel="stylesheet">
     <link href="{{ asset('assets/kesiswaan/css/style.css') }} " rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     {{-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> --}}
 
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
@@ -119,14 +123,11 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
 
-                    <li class="nav-label first">Data Kelas</li>
+                    <li class="nav-label first">Menu</li>
                     <li><a class="has-" href="{{ route('kesiswaan') }}" aria-expanded="false"><i
                                 class="ti-home"></i><span class="nav-text">Dashboard</span></a>
                     </li>
-                    <li><a class="has-" href="#" aria-expanded="false"><i
-                                class="ti-user"></i><span class="nav-text">Daftar Siswa</span></a>
-                    </li>
-                    <li><a class="has-" href="#" aria-expanded="false"><i
+                    <li><a class="has-" href="{{ route('laporan') }}" aria-expanded="false"><i
                                 class="ti-folder"></i><span class="nav-text">Laporan Absensi</span></a>
                     </li>
                 </ul>
@@ -175,10 +176,16 @@
     <script src="{{ asset('assets/kesiswaan/js/quixnav-init.js') }}"></script>
     <script src="{{ asset('assets/kesiswaan/js/custom.min.js') }}"></script>
 
-    <script src="{{ asset('assets/kesiswaan/vendor/chartist/js/chartist.min.js') }}"></script>
+    <!-- Chart Chartist plugin files -->
+    {{-- <script src="{{ asset('assets/kesiswaan/vendor/chartist/js/chartist.min.js') }}"></script>
+    <script src="{{ asset('assets/kesiswaan/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="{{ asset('assets/kesiswaan/js/plugins-init/chartist-init.js') }}"></script>
+
+    <script src="{{ asset('assets/kesiswaan/vendor/chartist/js/chartist.min.js') }}"></script> --}}
 
     <script src="{{ asset('assets/kesiswaan/vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('assets/kesiswaan/vendor/pg-calendar/js/pignose.calendar.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {{-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> --}}
 
     <script src="{{ asset('assets/kesiswaan/js/dashboard/dashboard-2.js') }}"></script>
@@ -190,6 +197,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
+
+    {{-- DATE PICKER --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <!-- Tambahkan di bagian bawah <body> -->
 </body>
 

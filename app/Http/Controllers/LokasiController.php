@@ -22,7 +22,7 @@ class LokasiController extends Controller
     {
         $lokasi_sekolah = $request->input('titik_koordinat');
         $radius = $request->input('jarak');
-
+        
         $update = DB::table('koordinat_sekolahs')
             ->where('id_koordinat_sekolah', 1)
             ->update([
