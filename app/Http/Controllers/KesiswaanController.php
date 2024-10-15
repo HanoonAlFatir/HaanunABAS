@@ -162,7 +162,8 @@ class KesiswaanController extends Controller
             $totalAttendance = $studentAttendance->count();
             $studentData = [
                 'nis' => $student->nis,
-                'name' => $student->user->nama,
+                'name' => $student->user->name,
+                'jenis_kelamin' => $student->jenis_kelamin,
                 'attendancePercentages' => [],
             ];
 
